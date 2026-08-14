@@ -148,6 +148,10 @@ dryforge는 `floor, not ceiling` 원칙을 사용합니다. 의도에는 근거�
 
 ## 작업 생명주기
 
+<p align="center">
+  <img src="assets/how-dryforge-works-ko.png" width="800" alt="dryforge 작동 원리" />
+</p>
+
 새 작업에서 `ready`와 `go`는 하나의 연속된 사이클을 이룹니다.
 
 ```text

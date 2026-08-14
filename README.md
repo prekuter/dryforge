@@ -142,6 +142,10 @@ The floor is also proportional. A small mechanical edit should not pay the coord
 
 ## Operating Lifecycle
 
+<p align="center">
+  <img src="assets/how-dryforge-works-en.png" width="800" alt="How dryforge works" />
+</p>
+
 For new work, `ready` and `go` form one continuous cycle:
 
 ```text
