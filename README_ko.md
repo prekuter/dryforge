@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://dryforge.vercel.app/assets/icon-1024.png" width="84" height="84" alt="dryforge" />
+<img src="https://dryforge.dev/logo-mark.svg" width="84" height="84" alt="dryforge" />
 
 # dryforge
 
@@ -13,10 +13,10 @@
 <p>Bounded autonomy, anchored in user-approved intent.</p>
 
 <p>
-  <a href="https://dryforge.vercel.app"><img alt="Website" src="https://img.shields.io/badge/website-dryforge.vercel.app-111111?style=flat-square"></a>
+  <a href="https://dryforge.dev"><img alt="Website" src="https://img.shields.io/badge/website-dryforge.dev-09090b?style=flat-square"></a>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-supported-6f4ad2?style=flat-square">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
-  <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
+  <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square">
 </p>
 
 <p>
@@ -40,14 +40,14 @@
 ### Claude Code
 
 ```text
-/plugin marketplace add fn-opt/dryforge
+/plugin marketplace add prekuter/dryforge
 /plugin install dryforge
 ```
 
 ### Codex
 
 ```text
-codex plugin marketplace add fn-opt/dryforge
+codex plugin marketplace add prekuter/dryforge
 codex plugin add dryforge@dryforge
 ```
 
@@ -370,6 +370,8 @@ Claude Code와 Codex 배포물은 같은 platform-neutral skill source에서 생
 
 ## 라이선스
 
-MIT
+MIT © 2026 prekuter
 
-<div align="center"><sub><a href="#top">맨 위로</a> · ready / go / migration</sub></div>
+<br />
+
+<div align="center"><sub><a href="#top">맨 위로</a> · © 2026 prekuter · MIT</sub></div>

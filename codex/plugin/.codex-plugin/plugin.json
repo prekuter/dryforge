@@ -3,10 +3,11 @@
   "version": "1.1.1",
   "description": "Intent-to-implementation: from a goal, design docs, notes, or a mix, elicit and validate intent into a grounded 3-doc, then orchestrate dependency-aware parallel execution with right-sized review.",
   "author": {
-    "name": "fn-opt"
+    "name": "prekuter",
+    "email": "prekuter@dryforge.dev"
   },
-  "homepage": "https://github.com/fn-opt/dryforge",
-  "repository": "https://github.com/fn-opt/dryforge",
+  "homepage": "https://github.com/prekuter/dryforge",
+  "repository": "https://github.com/prekuter/dryforge",
   "license": "MIT",
   "keywords": [
     "spec",
@@ -26,7 +27,7 @@
     "displayName": "dryforge",
     "shortDescription": "Turn any input into a grounded 3-doc, then execute it.",
     "longDescription": "dryforge turns any input — a goal, design docs, or notes — into a grounded 3-doc, then helps Codex execute it with dependency-aware waves, git isolation where needed, and right-sized verification.",
-    "developerName": "fn-opt",
+    "developerName": "prekuter",
     "category": "Productivity",
     "capabilities": [
       "Interactive",
