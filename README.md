@@ -6,7 +6,7 @@
 
 # dryforge
 
-### A bounded-autonomy plugin harness for Claude Code and Codex.
+### A bounded-autonomy plugin harness for Claude Code, Codex, and Grok Build.
 
 <h2>Your agent works like a senior developer.</h2>
 
@@ -16,6 +16,7 @@
   <a href="https://dryforge.dev"><img alt="Website" src="https://img.shields.io/badge/website-dryforge.dev-09090b?style=flat-square"></a>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-supported-6f4ad2?style=flat-square">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
+  <img alt="Grok Build" src="https://img.shields.io/badge/Grok%20Build-supported-1a1a1a?style=flat-square">
   <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square">
 </p>
 
@@ -49,9 +50,18 @@ codex plugin marketplace add prekuter/dryforge
 codex plugin add dryforge@dryforge
 ```
 
+### Grok Build
+
+```text
+grok plugin marketplace add prekuter/dryforge
+grok plugin install dryforge --trust
+```
+
 ### Updates
 
 Codex checks for new releases at the start of each new session and applies them automatically.
+
+Grok Build checks for plugin updates at session start when plugin auto-update is enabled (the default).
 
 Claude Code updates automatically when auto-update is enabled for dryforge under `/plugins -> installed -> dryforge -> auto-update`. Otherwise, update manually:
 
@@ -62,6 +72,10 @@ Claude Code updates automatically when auto-update is enabled for dryforge under
 
 # Codex
 codex plugin marketplace upgrade dryforge
+
+# Grok Build
+grok plugin marketplace update dryforge
+grok plugin update dryforge
 ```
 
 ## System Definition
@@ -270,7 +284,7 @@ The aim is not minimal token use or maximal agent activity. It is the least tota
 
 ## Persistent Project Context
 
-The project harness is the durable context layer that future agents read before working. It is not a transcript summary or a single memory file. It is a small, project-owned documentation system placed at the entry points Claude Code and Codex already understand.
+The project harness is the durable context layer that future agents read before working. It is not a transcript summary or a single memory file. It is a small, project-owned documentation system placed at the entry points Claude Code, Codex, and Grok Build already understand.
 
 | State layer | Lifetime | Authority |
 |---|---|---|
@@ -343,7 +357,7 @@ dryforge is most useful for features, project setup, migrations, and changes whe
 
 dryforge is stack- and language-independent. It discovers the repository's actual tools, conventions, and verification methods at runtime rather than encoding one framework's workflow into the product.
 
-Claude Code and Codex distributions are generated from the same platform-neutral skill source, with platform-specific packaging for their respective plugin systems.
+Claude Code, Codex, and Grok Build distributions are generated from the same platform-neutral skill source, with platform-specific packaging for their respective plugin systems.
 
 The same portability principle applies to project output. Contracts and project context use plain Markdown and standard agent entry files. The project remains understandable and operable without dryforge-specific document readers.
 

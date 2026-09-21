@@ -1,0 +1,10 @@
+{
+  "name": "dryforge",
+  "version": "1.2.0",
+  "description": "Intent-to-implementation: from a goal, design docs, notes, or a mix, elicit and validate intent into a grounded 3-doc, then orchestrate dependency-aware parallel execution with right-sized review.",
+  "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+  "homepage": "https://github.com/prekuter/dryforge",
+  "repository": "https://github.com/prekuter/dryforge",
+  "license": "MIT",
+  "keywords": ["spec", "plan", "intent", "elicitation", "execution", "orchestration", "parallel", "subagent", "tdd", "code-review", "worktree"]
+}

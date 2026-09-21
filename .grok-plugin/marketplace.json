@@ -1,0 +1,16 @@
+{
+  "name": "dryforge",
+  "description": "Say what you want to build. Two commands later, it's built.",
+  "owner": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+  "plugins": [
+    {
+      "name": "dryforge",
+      "description": "Intent-to-implementation: Ready, then Go.",
+      "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+      "source": "./grok",
+      "homepage": "https://github.com/prekuter/dryforge",
+      "category": "development",
+      "keywords": ["spec", "plan", "intent", "elicitation", "orchestration", "harness"]
+    }
+  ]
+}

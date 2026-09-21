@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
-# build.sh — regenerate both platform plugins from the single canonical source.
+# build.sh — regenerate platform plugins from the single canonical source.
 #
 #   src/skills/        canonical, platform-neutral skills (single source of truth)
 #   platform/claude/   claude-only frontmatter values + plugin.json + LICENSE
 #   platform/codex/    codex-only openai.yaml + plugin.json + LICENSE
+#   platform/grok/     grok-only plugin.json + LICENSE
 #   README.md          repo-root README (+ README_KO.md) — GitHub landing only, NOT bundled into plugins
-#   claude/            generated Claude plugin   (committed; Claude installs this)
-#   codex/plugin/      generated Codex plugin    (committed; Codex installs this)
+#   claude/            generated Claude plugin      (committed; Claude installs this)
+#   codex/plugin/      generated Codex plugin       (committed; Codex installs this)
+#   grok/              generated Grok Build plugin  (committed; Grok installs this)
 #
 # Root marketplace manifests (.claude-plugin/marketplace.json, .agents/plugins/
-# marketplace.json) are committed repo files, not build outputs.
+# marketplace.json, .grok-plugin/marketplace.json) are committed repo files, not
+# build outputs.
 #
 # Build-time guards (every build — dogfood and publish both go through here):
 #   ① shared references byte-identical (3 pairs)
 #   ② frontmatter injection post-verified (a silent perl no-op must not ship)
 #   ③ skill list discovered dynamically from src/skills/*/ (a 4th skill without
 #     its claude_tools mapping or codex openai.yaml overlay fails the build)
-#   ④ all 4 plugin.json versions non-empty + identical + match CHANGELOG top
+#   ④ all plugin.json versions non-empty + identical + match CHANGELOG top
 
 set -euo pipefail
 
@@ -87,17 +90,41 @@ done
 cp "$PLAT/codex/plugin.json" "$ROOT/codex/plugin/.codex-plugin/plugin.json"
 cp "$PLAT/codex/LICENSE" "$ROOT/codex/plugin/"
 
-find "$ROOT/claude" "$ROOT/codex" -name ".DS_Store" -delete 2>/dev/null || true
+# ── Grok Build → ./grok ─────────────────────────────────────────────────────
+# Grok tool IDs differ from Claude's, and the skill body is already
+# platform-neutral ("dispatch a general-purpose subagent"). Inject only the
+# explicit-invocation flag; do not pin Claude allowed-tools names.
+echo "=== build: grok ==="
+rm -rf "$ROOT/grok"
+mkdir -p "$ROOT/grok/.grok-plugin"
+cp -R "$SRC" "$ROOT/grok/skills"
+for s in $SKILLS; do
+  INJECT=$'disable-model-invocation: true' \
+    perl -0777 -i -pe 'BEGIN{$j=$ENV{INJECT}} s/\A(---\n.*?\n)---\n/$1$j\n---\n/s' \
+    "$ROOT/grok/skills/$s/SKILL.md"
+done
+# guard ② (grok leg): assert the invocation lock actually landed
+for s in $SKILLS; do
+  f="$ROOT/grok/skills/$s/SKILL.md"
+  grep -q '^disable-model-invocation: true$' "$f" \
+    || { echo "✗ frontmatter 주입 실패: $s (grok) — 자동실행 방지 플래그 없이 출고 불가" >&2; exit 1; }
+done
+cp "$PLAT/grok/plugin.json" "$ROOT/grok/.grok-plugin/plugin.json"
+cp "$PLAT/grok/LICENSE" "$ROOT/grok/"
+
+find "$ROOT/claude" "$ROOT/codex" "$ROOT/grok" -name ".DS_Store" -delete 2>/dev/null || true
 
 # ── guard ④: version consistency ────────────────────────────────────────────
-# All 4 plugin.json carry the same non-empty version AND it matches the CHANGELOG
+# All plugin.json carry the same non-empty version AND it matches the CHANGELOG
 # top entry. Catches manual-edit skew at build time instead of leaving it for a
 # human (or another agent) to spot. (tag side is publish.sh's job — kept out
 # here so build stays git-free.)
 pj_ver() { perl -ne 'if(/"version"\s*:\s*"([^"]+)"/){print $1; last}' "$1"; }
 VERS=""
-for pj in "$PLAT/claude/plugin.json" "$PLAT/codex/plugin.json" \
-          "$ROOT/claude/.claude-plugin/plugin.json" "$ROOT/codex/plugin/.codex-plugin/plugin.json"; do
+for pj in "$PLAT/claude/plugin.json" "$PLAT/codex/plugin.json" "$PLAT/grok/plugin.json" \
+          "$ROOT/claude/.claude-plugin/plugin.json" \
+          "$ROOT/codex/plugin/.codex-plugin/plugin.json" \
+          "$ROOT/grok/.grok-plugin/plugin.json"; do
   v="$(pj_ver "$pj")"
   [ -n "$v" ] || { echo "✗ version 비어있음: $pj" >&2; exit 1; }
   VERS="$VERS$v"$'\n'
@@ -113,6 +140,6 @@ if [ "$UNIQ" != "$CL_VER" ]; then
   echo "✗ plugin.json=v$UNIQ but CHANGELOG top=v$CL_VER" >&2
   exit 1
 fi
-echo "✓ version OK: v$UNIQ (4 manifests + CHANGELOG)"
+echo "✓ version OK: v$UNIQ (6 manifests + CHANGELOG)"
 
-echo "=== done → ./claude  ./codex/plugin ==="
+echo "=== done → ./claude  ./codex/plugin  ./grok ==="

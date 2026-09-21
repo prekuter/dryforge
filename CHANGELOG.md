@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.0 (2026-09-21)
+
+- add Grok Build plugin packaging from the same platform-neutral skill source
+
 ## v1.1.1 (2026-06-12)
 
 - v1.1.1 : minor update

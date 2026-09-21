@@ -36,7 +36,7 @@ category that *does* apply is a hollow shell — a defect.
 ```
 project-root/
 ├── CLAUDE.md                     ← Claude Code entry point
-├── AGENTS.md                     ← Codex entry point (identical content to CLAUDE.md)
+├── AGENTS.md                     ← Codex and Grok Build entry point (identical content to CLAUDE.md)
 ├── docs/
 │   ├── architecture.md           ← system composition
 │   ├── business-rules.md         ← domain logic
