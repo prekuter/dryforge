@@ -14,9 +14,15 @@
 
 <p>
   <a href="https://dryforge.dev"><img alt="Website" src="https://img.shields.io/badge/website-dryforge.dev-09090b?style=flat-square"></a>
+  <a href="https://github.com/prekuter/dryforge/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/prekuter/dryforge/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/prekuter/dryforge/releases"><img alt="Release" src="https://img.shields.io/github/v/release/prekuter/dryforge?style=flat-square&label=release"></a>
+  <a href="https://github.com/prekuter/dryforge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/prekuter/dryforge?style=flat-square&logo=github&label=stars"></a>
+  <a href="https://github.com/prekuter/dryforge/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/prekuter/dryforge?style=flat-square"></a>
+</p>
+
+<p>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-supported-6f4ad2?style=flat-square">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
-  <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square">
 </p>
 
 <p>

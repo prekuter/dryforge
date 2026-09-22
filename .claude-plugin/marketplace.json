@@ -1,6 +1,6 @@
 {
   "name": "dryforge",
-  "description": "Say what you want to build. Two commands later, it's built.",
+  "description": "Official marketplace for dryforge.",
   "owner": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
   "plugins": [
     {
