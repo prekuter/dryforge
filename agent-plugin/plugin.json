@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dryforge",
+  "version": "1.2.0",
+  "description": "A bounded-autonomy plugin harness that turns approved intent into verified implementation.",
+  "author": {
+    "name": "prekuter",
+    "email": "prekuter@dryforge.dev"
+  },
+  "homepage": "https://github.com/prekuter/dryforge",
+  "repository": "https://github.com/prekuter/dryforge",
+  "license": "AGPL-3.0-only",
+  "keywords": [
+    "spec",
+    "plan",
+    "intent",
+    "elicitation",
+    "execution",
+    "orchestration",
+    "parallel",
+    "subagent",
+    "tdd",
+    "code-review",
+    "worktree"
+  ]
+}

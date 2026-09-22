@@ -1,0 +1,17 @@
+{
+  "name": "dryforge",
+  "description": "Official marketplace for dryforge.",
+  "owner": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+  "plugins": [
+    {
+      "name": "dryforge",
+      "description": "Intent-to-implementation: Ready, then Go.",
+      "version": "1.2.0",
+      "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+      "source": "./grok",
+      "homepage": "https://github.com/prekuter/dryforge",
+      "category": "development",
+      "keywords": ["spec", "plan", "intent", "elicitation", "orchestration", "harness"]
+    }
+  ]
+}

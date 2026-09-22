@@ -6,7 +6,7 @@
 
 # dryforge
 
-### Claude Code와 Codex를 위한 bounded-autonomy 플러그인 하네스.
+### A bounded-autonomy plugin harness for Agents.
 
 <h2>Your agent works like a senior developer.</h2>
 
@@ -23,6 +23,8 @@
 <p>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-supported-6f4ad2?style=flat-square">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
+  <img alt="Grok Build" src="https://img.shields.io/badge/Grok%20Build-supported-111827?style=flat-square">
+  <img alt="GitHub Copilot" src="https://img.shields.io/badge/GitHub%20Copilot-supported-24292f?style=flat-square&logo=githubcopilot&logoColor=white">
 </p>
 
 <p>
@@ -57,6 +59,20 @@ codex plugin marketplace add prekuter/dryforge
 codex plugin add dryforge@dryforge
 ```
 
+### Grok Build
+
+```text
+grok plugin marketplace add prekuter/dryforge
+grok plugin install dryforge --trust
+```
+
+### GitHub Copilot CLI
+
+```text
+copilot plugin marketplace add prekuter/dryforge
+copilot plugin install dryforge@dryforge
+```
+
 ### 업데이트
 
 Codex는 새 세션을 시작할 때 새 릴리스를 확인하고 자동으로 적용합니다.
@@ -70,6 +86,12 @@ Claude Code는 `/plugins -> installed -> dryforge -> auto-update`에서 자동 �
 
 # Codex
 codex plugin marketplace upgrade dryforge
+
+# Grok Build
+grok plugin update dryforge
+
+# GitHub Copilot CLI
+copilot plugin update dryforge
 ```
 
 <a id="system-definition"></a>
@@ -290,7 +312,7 @@ dryforge는 비용을 토큰 하나의 문제가 아니라 전체 실행의 자�
 
 ## 지속되는 프로젝트 맥락
 
-프로젝트 하네스는 다음 에이전트가 작업 전에 읽는 지속적인 맥락 계층입니다. 한 세션을 요약한 transcript나 단일 memory file이 아닙니다. 프로젝트가 소유하며, Claude Code와 Codex가 이미 읽는 진입점에 놓이는 작은 문서 시스템입니다.
+프로젝트 하네스는 다음 에이전트가 작업 전에 읽는 지속적인 맥락 계층입니다. 한 세션을 요약한 transcript나 단일 memory file이 아닙니다. 프로젝트가 소유하며, 표준 에이전트 진입점에 놓이는 작은 문서 시스템입니다.
 
 | 상태 계층 | 수명 | 기준이 되는 범위 |
 |---|---|---|
@@ -365,7 +387,7 @@ dryforge는 사용자가 명시적으로 호출할 때만 실행됩니다. 평�
 
 dryforge는 특정 stack이나 언어에 종속되지 않습니다. 한 프레임워크의 작업 방식을 제품에 고정하지 않고, 실제 저장소에서 도구, 관례, 검증 방법을 실행 시점에 발견합니다.
 
-Claude Code와 Codex 배포물은 같은 platform-neutral skill source에서 생성되며, 각 플랫폼의 플러그인 체계에 필요한 packaging만 다르게 적용합니다.
+Claude Code, Codex, Grok Build, GitHub Copilot 배포물은 같은 platform-neutral skill source에서 생성되며, 각 플러그인 체계에 필요한 packaging만 다르게 적용합니다.
 
 프로젝트에 남기는 결과도 같은 원칙을 따릅니다. 계약과 프로젝트 맥락은 일반 Markdown과 표준 에이전트 진입 파일을 사용합니다. dryforge 전용 문서 리더가 없어도 프로젝트를 이해하고 운영할 수 있습니다.
 
@@ -376,8 +398,8 @@ Claude Code와 Codex 배포물은 같은 platform-neutral skill source에서 생
 
 ## 라이선스
 
-MIT © 2026 prekuter
+[GNU Affero General Public License v3.0 only](LICENSE) (`AGPL-3.0-only`).
 
 <br />
 
-<div align="center"><sub><a href="#top">맨 위로</a> · © 2026 prekuter · MIT</sub></div>
+<div align="center"><sub><a href="#top">맨 위로</a> · © 2026 prekuter · AGPL-3.0-only</sub></div>

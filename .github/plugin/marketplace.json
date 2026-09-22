@@ -1,0 +1,21 @@
+{
+  "name": "dryforge",
+  "owner": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+  "metadata": {
+    "description": "Official marketplace for dryforge."
+  },
+  "plugins": [
+    {
+      "name": "dryforge",
+      "description": "Intent-to-implementation: Ready, then Go.",
+      "version": "1.2.0",
+      "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+      "source": "./agent-plugin",
+      "homepage": "https://github.com/prekuter/dryforge",
+      "repository": "https://github.com/prekuter/dryforge",
+      "license": "AGPL-3.0-only",
+      "category": "Productivity",
+      "keywords": ["spec", "plan", "intent", "elicitation", "orchestration", "harness"]
+    }
+  ]
+}
