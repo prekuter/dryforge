@@ -6,7 +6,7 @@
 
 # dryforge
 
-### A bounded-autonomy plugin harness for Claude Code and Codex.
+### A bounded-autonomy plugin harness for Agents.
 
 <h2>Your agent works like a senior developer.</h2>
 
@@ -23,6 +23,8 @@
 <p>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-supported-6f4ad2?style=flat-square">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
+  <img alt="Grok Build" src="https://img.shields.io/badge/Grok%20Build-supported-111827?style=flat-square">
+  <img alt="GitHub Copilot" src="https://img.shields.io/badge/GitHub%20Copilot-supported-24292f?style=flat-square&logo=githubcopilot&logoColor=white">
 </p>
 
 <p>
@@ -55,6 +57,20 @@ codex plugin marketplace add prekuter/dryforge
 codex plugin add dryforge@dryforge
 ```
 
+### Grok Build
+
+```text
+grok plugin marketplace add prekuter/dryforge
+grok plugin install dryforge --trust
+```
+
+### GitHub Copilot CLI
+
+```text
+copilot plugin marketplace add prekuter/dryforge
+copilot plugin install dryforge@dryforge
+```
+
 ### Updates
 
 Codex checks for new releases at the start of each new session and applies them automatically.
@@ -68,6 +84,12 @@ Claude Code updates automatically when auto-update is enabled for dryforge under
 
 # Codex
 codex plugin marketplace upgrade dryforge
+
+# Grok Build
+grok plugin update dryforge
+
+# GitHub Copilot CLI
+copilot plugin update dryforge
 ```
 
 ## System Definition
@@ -276,7 +298,7 @@ The aim is not minimal token use or maximal agent activity. It is the least tota
 
 ## Persistent Project Context
 
-The project harness is the durable context layer that future agents read before working. It is not a transcript summary or a single memory file. It is a small, project-owned documentation system placed at the entry points Claude Code and Codex already understand.
+The project harness is the durable context layer that future agents read before working. It is not a transcript summary or a single memory file. It is a small, project-owned documentation system placed at standard agent entry points.
 
 | State layer | Lifetime | Authority |
 |---|---|---|
@@ -349,7 +371,7 @@ dryforge is most useful for features, project setup, migrations, and changes whe
 
 dryforge is stack- and language-independent. It discovers the repository's actual tools, conventions, and verification methods at runtime rather than encoding one framework's workflow into the product.
 
-Claude Code and Codex distributions are generated from the same platform-neutral skill source, with platform-specific packaging for their respective plugin systems.
+Claude Code, Codex, Grok Build, and GitHub Copilot distributions are generated from the same platform-neutral skill source. Only the packaging for each plugin system differs.
 
 The same portability principle applies to project output. Contracts and project context use plain Markdown and standard agent entry files. The project remains understandable and operable without dryforge-specific document readers.
 
@@ -360,8 +382,8 @@ The same portability principle applies to project output. Contracts and project 
 
 ## License
 
-MIT © 2026 prekuter
+[GNU Affero General Public License v3.0 only](LICENSE) (`AGPL-3.0-only`).
 
 <br />
 
-<div align="center"><sub><a href="#top">back to top</a> · © 2026 prekuter · MIT</sub></div>
+<div align="center"><sub><a href="#top">back to top</a> · © 2026 prekuter · AGPL-3.0-only</sub></div>

@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.0 (2026-09-23)
+
+- Added Grok Build support with marketplace packaging and validation, based in part on @williamjeong2’s contribution in #3
+- Added Agent Plugins 1.0 packaging for GitHub Copilot CLI
+- Extended reproducible builds and release validation across all four distributions
+
 ## v1.1.2 (2026-09-23)
 
 - Added CI and reproducible build checks
