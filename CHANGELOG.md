@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.2 (2026-09-23)
+
+- Added CI and reproducible build checks
+- Added a release pull request workflow
+- Refined plugin marketplace metadata
+
 ## v1.1.1 (2026-06-12)
 
 - v1.1.1 : minor update
