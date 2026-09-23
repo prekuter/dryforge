@@ -25,6 +25,7 @@
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
   <img alt="Grok Build" src="https://img.shields.io/badge/Grok%20Build-supported-111827?style=flat-square">
   <img alt="GitHub Copilot" src="https://img.shields.io/badge/GitHub%20Copilot-supported-24292f?style=flat-square&logo=githubcopilot&logoColor=white">
+  <img alt="Antigravity CLI" src="https://img.shields.io/badge/Antigravity%20CLI-supported-4285f4?style=flat-square">
 </p>
 
 <p>
@@ -73,6 +74,15 @@ copilot plugin marketplace add prekuter/dryforge
 copilot plugin install dryforge@dryforge
 ```
 
+### Antigravity CLI
+
+```text
+agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
+```
+
+Antigravity에서는 plugin 명령에 namespace가 붙습니다: `/dryforge:ready`, `/dryforge:go`,
+`/dryforge:migration`.
+
 ### 업데이트
 
 Codex는 새 세션을 시작할 때 새 릴리스를 확인하고 자동으로 적용합니다.
@@ -92,6 +102,9 @@ grok plugin update dryforge
 
 # GitHub Copilot CLI
 copilot plugin update dryforge
+
+# Antigravity CLI
+agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
 ```
 
 <a id="system-definition"></a>
@@ -387,7 +400,7 @@ dryforge는 사용자가 명시적으로 호출할 때만 실행됩니다. 평�
 
 dryforge는 특정 stack이나 언어에 종속되지 않습니다. 한 프레임워크의 작업 방식을 제품에 고정하지 않고, 실제 저장소에서 도구, 관례, 검증 방법을 실행 시점에 발견합니다.
 
-Claude Code, Codex, Grok Build, GitHub Copilot 배포물은 같은 platform-neutral skill source에서 생성되며, 각 플러그인 체계에 필요한 packaging만 다르게 적용합니다.
+Claude Code, Codex, Grok Build, GitHub Copilot, Antigravity CLI 배포물은 같은 platform-neutral skill source에서 생성되며, 각 플러그인 체계에 필요한 packaging만 다르게 적용합니다.
 
 프로젝트에 남기는 결과도 같은 원칙을 따릅니다. 계약과 프로젝트 맥락은 일반 Markdown과 표준 에이전트 진입 파일을 사용합니다. dryforge 전용 문서 리더가 없어도 프로젝트를 이해하고 운영할 수 있습니다.
 

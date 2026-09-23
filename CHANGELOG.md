@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.0 (2026-09-24)
+
+- Added native Antigravity CLI packaging with official manifest, plugin rules, and namespaced skill commands
+- Verified manual-only invocation across ordinary prompts and explicit ready, go, migration, subagent, and parallel worktree flows
+- Extended reproducible builds, release validation, dogfood tooling, README guidance, and the website for Antigravity CLI
+
 ## v1.2.0 (2026-09-23)
 
 - Added Grok Build support with marketplace packaging and validation, based in part on @williamjeong2’s contribution in #3

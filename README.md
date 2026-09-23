@@ -25,6 +25,7 @@
   <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
   <img alt="Grok Build" src="https://img.shields.io/badge/Grok%20Build-supported-111827?style=flat-square">
   <img alt="GitHub Copilot" src="https://img.shields.io/badge/GitHub%20Copilot-supported-24292f?style=flat-square&logo=githubcopilot&logoColor=white">
+  <img alt="Antigravity CLI" src="https://img.shields.io/badge/Antigravity%20CLI-supported-4285f4?style=flat-square">
 </p>
 
 <p>
@@ -71,6 +72,14 @@ copilot plugin marketplace add prekuter/dryforge
 copilot plugin install dryforge@dryforge
 ```
 
+### Antigravity CLI
+
+```text
+agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
+```
+
+Antigravity namespaces plugin commands: `/dryforge:ready`, `/dryforge:go`, and `/dryforge:migration`.
+
 ### Updates
 
 Codex checks for new releases at the start of each new session and applies them automatically.
@@ -90,6 +99,9 @@ grok plugin update dryforge
 
 # GitHub Copilot CLI
 copilot plugin update dryforge
+
+# Antigravity CLI
+agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
 ```
 
 ## System Definition
@@ -371,7 +383,7 @@ dryforge is most useful for features, project setup, migrations, and changes whe
 
 dryforge is stack- and language-independent. It discovers the repository's actual tools, conventions, and verification methods at runtime rather than encoding one framework's workflow into the product.
 
-Claude Code, Codex, Grok Build, and GitHub Copilot distributions are generated from the same platform-neutral skill source. Only the packaging for each plugin system differs.
+Claude Code, Codex, Grok Build, GitHub Copilot, and Antigravity CLI distributions are generated from the same platform-neutral skill source. Only the packaging for each plugin system differs.
 
 The same portability principle applies to project output. Contracts and project context use plain Markdown and standard agent entry files. The project remains understandable and operable without dryforge-specific document readers.
 
