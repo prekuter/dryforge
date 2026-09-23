@@ -6,11 +6,13 @@
 #   platform/codex/    codex-only openai.yaml + plugin.json + LICENSE
 #   platform/grok/     grok-only plugin.json + LICENSE
 #   platform/agent-plugin/  Agent Plugins 1.0 plugin.json + LICENSE
+#   platform/antigravity/   Antigravity plugin.json + rules + LICENSE
 #   README.md          repo-root README (+ README_KO.md) — GitHub landing only, NOT bundled into plugins
 #   claude/            generated Claude plugin   (committed; Claude installs this)
 #   codex/plugin/      generated Codex plugin    (committed; Codex installs this)
 #   grok/              generated Grok plugin     (committed; Grok installs this)
 #   agent-plugin/      generated Agent Plugin    (committed; Copilot installs this)
+#   antigravity/       generated Antigravity plugin (committed; Antigravity installs this)
 #
 # Root marketplace manifests are committed repo files, not build outputs.
 #
@@ -118,6 +120,14 @@ done
 cp "$PLAT/agent-plugin/plugin.json" "$OUT/agent-plugin/plugin.json"
 cp "$PLAT/agent-plugin/LICENSE" "$OUT/agent-plugin/"
 
+# ── Antigravity → ./antigravity ────────────────────────────────────────────
+echo "=== build: antigravity ==="
+mkdir -p "$OUT/antigravity"
+cp -R "$SRC" "$OUT/antigravity/skills"
+cp "$PLAT/antigravity/plugin.json" "$OUT/antigravity/plugin.json"
+cp "$PLAT/antigravity/LICENSE" "$OUT/antigravity/"
+cp -R "$PLAT/antigravity/rules" "$OUT/antigravity/rules"
+
 # guard ②: manual-only injection must land once in every Grok and Agent Plugin skill.
 for target in grok agent-plugin; do
   for s in $SKILLS; do
@@ -133,7 +143,7 @@ for target in grok agent-plugin; do
   done
 done
 
-find "$OUT/claude" "$OUT/codex" "$OUT/grok" "$OUT/agent-plugin" \
+find "$OUT/claude" "$OUT/codex" "$OUT/grok" "$OUT/agent-plugin" "$OUT/antigravity" \
   -name ".DS_Store" -delete 2>/dev/null || true
 
 # ── guard ④: version consistency ────────────────────────────────────────────
@@ -169,7 +179,7 @@ echo "✓ version OK: v$UNIQ (8 manifests + CHANGELOG)"
 BACKUP="$BUILD_TMP/previous"
 mkdir -p "$BACKUP/codex"
 MOVED_OLD=""
-for rel in claude codex/plugin grok agent-plugin; do
+for rel in claude codex/plugin grok agent-plugin antigravity; do
   if [ -e "$ROOT/$rel" ]; then
     mkdir -p "$(dirname "$BACKUP/$rel")"
     if ! mv "$ROOT/$rel" "$BACKUP/$rel"; then
@@ -185,7 +195,7 @@ for rel in claude codex/plugin grok agent-plugin; do
 done
 
 MOVED_NEW=""
-for rel in claude codex/plugin grok agent-plugin; do
+for rel in claude codex/plugin grok agent-plugin antigravity; do
   mkdir -p "$(dirname "$ROOT/$rel")"
   if ! mv "$OUT/$rel" "$ROOT/$rel"; then
     for rollback in $MOVED_NEW; do
@@ -202,4 +212,4 @@ for rel in claude codex/plugin grok agent-plugin; do
   MOVED_NEW="$rel $MOVED_NEW"
 done
 
-echo "=== done → ./claude  ./codex/plugin  ./grok  ./agent-plugin ==="
+echo "=== done → ./claude  ./codex/plugin  ./grok  ./agent-plugin  ./antigravity ==="

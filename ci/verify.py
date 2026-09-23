@@ -12,6 +12,18 @@ from pathlib import Path
 
 
 AGENT_PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+ANTIGRAVITY_SCHEMA = "https://antigravity.google/schemas/v1/plugin.json"
+ANTIGRAVITY_FIELDS = {"$schema", "name", "description"}
+VERSIONED_MANIFESTS = (
+    Path("platform/claude/plugin.json"),
+    Path("platform/codex/plugin.json"),
+    Path("platform/grok/plugin.json"),
+    Path("platform/agent-plugin/plugin.json"),
+    Path("claude/.claude-plugin/plugin.json"),
+    Path("codex/plugin/.codex-plugin/plugin.json"),
+    Path("grok/plugin.json"),
+    Path("agent-plugin/plugin.json"),
+)
 AGENT_PLUGIN_FIELDS = {
     "$schema",
     "name",
@@ -80,11 +92,11 @@ def changelog_version(root: Path) -> str:
 
 
 def manifest_versions(root: Path) -> dict[Path, str]:
-    manifests = sorted(root.glob("**/plugin.json"))
-    if not manifests:
-        raise VerificationError("no plugin.json manifests found")
     versions: dict[Path, str] = {}
-    for path in manifests:
+    for relative in VERSIONED_MANIFESTS:
+        path = root / relative
+        if not path.is_file():
+            raise VerificationError(f"missing versioned manifest: {relative}")
         data = load_json(path)
         version = data.get("version")
         if not isinstance(version, str) or not version.strip():
@@ -223,6 +235,57 @@ def validate_grok_package(root: Path) -> None:
     print(f"OK Grok package ({len(discovered)} skills)")
 
 
+def validate_antigravity_package(root: Path) -> None:
+    package = root / "antigravity"
+    manifest = load_json(package / "plugin.json")
+    unknown = set(manifest) - ANTIGRAVITY_FIELDS
+    if unknown:
+        raise VerificationError(f"unknown Antigravity manifest fields: {', '.join(sorted(unknown))}")
+    if manifest.get("$schema") != ANTIGRAVITY_SCHEMA:
+        raise VerificationError("Antigravity schema is missing or unsupported")
+    if manifest.get("name") != "dryforge":
+        raise VerificationError("unexpected Antigravity plugin name")
+    if not isinstance(manifest.get("description"), str) or not manifest["description"].strip():
+        raise VerificationError("Antigravity description is missing")
+
+    source_skills = root / "src/skills"
+    generated_skills = package / "skills"
+    source_names = sorted(path.name for path in source_skills.iterdir() if path.is_dir())
+    generated_names = sorted(path.name for path in generated_skills.iterdir() if path.is_dir())
+    source_files = {
+        path.relative_to(source_skills): path.read_bytes()
+        for path in source_skills.rglob("*")
+        if path.is_file() and path.name != ".DS_Store"
+    }
+    generated_files = {
+        path.relative_to(generated_skills): path.read_bytes()
+        for path in generated_skills.rglob("*")
+        if path.is_file() and path.name != ".DS_Store"
+    }
+    if not source_names or generated_names != source_names or generated_files != source_files:
+        raise VerificationError("Antigravity skills do not match src/skills")
+    for name in source_names:
+        generated = generated_skills / name / "SKILL.md"
+        if frontmatter(generated).get("name") != name:
+            raise VerificationError(f"Antigravity skill name does not match directory: {name}")
+
+    rule = package / "rules/invocation.md"
+    if not rule.is_file():
+        raise VerificationError("Antigravity invocation rule is missing")
+    rule_text = rule.read_text(encoding="utf-8")
+    source_rule = root / "platform/antigravity/rules/invocation.md"
+    if not source_rule.is_file() or source_rule.read_bytes() != rule.read_bytes():
+        raise VerificationError("Antigravity invocation rule differs from platform source")
+    required_phrases = (
+        "Only invoke a dryforge skill when the user explicitly enters",
+        "Do not select or invoke dryforge from semantic similarity",
+        "Without an explicit dryforge slash command",
+    )
+    if any(phrase not in rule_text for phrase in required_phrases):
+        raise VerificationError("Antigravity invocation rule is missing the manual-only contract")
+    print(f"OK Antigravity package ({len(generated_names)} skills + invocation rule)")
+
+
 def git_diff(root: Path) -> str:
     top = Path(run(["git", "rev-parse", "--show-toplevel"], root, capture=True)).resolve()
     relative = root.resolve().relative_to(top)
@@ -251,6 +314,8 @@ def verify(root: Path, tag: str | None = None) -> None:
         "platform/codex/plugin.json",
         "platform/grok/plugin.json",
         "platform/agent-plugin/plugin.json",
+        "platform/antigravity/plugin.json",
+        "platform/antigravity/rules/invocation.md",
         ".grok-plugin/marketplace.json",
         ".github/plugin/marketplace.json",
     ]
@@ -262,6 +327,7 @@ def verify(root: Path, tag: str | None = None) -> None:
     validate_marketplaces(root)
     validate_agent_plugin(root)
     validate_grok_package(root)
+    validate_antigravity_package(root)
     validate_reproducible_build(root)
 
 

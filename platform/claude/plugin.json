@@ -1,7 +1,7 @@
 {
   "name": "dryforge",
   "description": "A bounded-autonomy plugin harness that turns approved intent into verified implementation.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "license": "AGPL-3.0-only",
   "keywords": ["spec", "plan", "intent", "elicitation", "execution", "orchestration", "parallel", "subagent", "tdd", "code-review", "worktree"],
   "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" }
