@@ -2,400 +2,359 @@
 
 <div align="center">
 
-<img src="https://dryforge.dev/logo-mark.svg" width="84" height="84" alt="dryforge" />
-
-# dryforge
-
-### A bounded-autonomy plugin harness for Agents.
-
-<h2>Your agent works like a senior developer.</h2>
-
-<p>Bounded autonomy, anchored in user-approved intent.</p>
-
 <p>
-  <a href="https://dryforge.dev"><img alt="Website" src="https://img.shields.io/badge/website-dryforge.dev-09090b?style=flat-square"></a>
-  <a href="https://github.com/prekuter/dryforge/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/prekuter/dryforge/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://github.com/prekuter/dryforge/releases"><img alt="Release" src="https://img.shields.io/github/v/release/prekuter/dryforge?style=flat-square&label=release"></a>
-  <a href="https://github.com/prekuter/dryforge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/prekuter/dryforge?style=flat-square&logo=github&label=stars"></a>
-  <a href="https://github.com/prekuter/dryforge/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/prekuter/dryforge?style=flat-square"></a>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/readme/hero-light.svg">
+  <img alt="Dryforge — Your agent works like a senior developer. A bounded-autonomy plugin harness for coding agents. Intent to implementation: ready, then go." src="assets/readme/hero-light.svg" width="100%">
+</picture>
 </p>
 
 <p>
-  <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-supported-6f4ad2?style=flat-square">
-  <img alt="Codex" src="https://img.shields.io/badge/Codex-supported-0f172a?style=flat-square">
-  <img alt="Grok Build" src="https://img.shields.io/badge/Grok%20Build-supported-111827?style=flat-square">
-  <img alt="GitHub Copilot" src="https://img.shields.io/badge/GitHub%20Copilot-supported-24292f?style=flat-square&logo=githubcopilot&logoColor=white">
-  <img alt="Antigravity CLI" src="https://img.shields.io/badge/Antigravity%20CLI-supported-4285f4?style=flat-square">
+<a href="https://github.com/prekuter/dryforge/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/prekuter/dryforge/actions/workflows/ci.yml/badge.svg"></a>
+&nbsp;&nbsp;
+<a href="https://github.com/prekuter/dryforge/releases"><img alt="Release" src="https://img.shields.io/github/v/release/prekuter/dryforge?style=flat-square&label=release"></a>
+&nbsp;&nbsp;
+<a href="https://github.com/prekuter/dryforge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/prekuter/dryforge?style=flat-square&logo=github&label=stars"></a>
+&nbsp;&nbsp;
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/supported-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/readme/supported-light.svg">
+  <img alt="Supported: Claude Code, Codex, Grok Build, GitHub Copilot, Antigravity" src="assets/readme/supported-light.svg">
+</picture>
 </p>
 
 <p>
   <a href="#install-and-update">Install</a> ·
-  <a href="#system-definition">System</a> ·
-  <a href="#operating-lifecycle">Lifecycle</a> ·
-  <a href="#from-intent-to-authority">Intent</a> ·
-  <a href="#spec-bound-execution">Execution</a> ·
-  <a href="#evidence-backed-verification">Verification</a> ·
-  <a href="#persistent-project-context">Context</a> ·
-  <a href="#existing-project-migration">Migration</a> ·
+  <a href="#getting-started">Getting started</a> ·
+  <a href="https://dryforge.dev">Website</a> ·
   <a href="./README_ko.md">한국어</a>
 </p>
 
 </div>
 
-## Install and Update
+<a id="install-and-update"></a>
 
-### Claude Code
+# Install & Update
+
+<details>
+<summary><b>Claude Code</b></summary>
+
+
+Install:
 
 ```text
 /plugin marketplace add prekuter/dryforge
 /plugin install dryforge
 ```
 
-### Codex
+
+Update:
+
+```text
+/plugin marketplace update dryforge
+/plugin update dryforge@dryforge
+```
+
+
+**Auto-update:** off by default. Turn it on in `/plugins` → installed → dryforge → auto-update.
+
+
+</details>
+
+<details>
+<summary><b>Codex</b></summary>
+
+
+Install:
 
 ```text
 codex plugin marketplace add prekuter/dryforge
 codex plugin add dryforge@dryforge
 ```
 
-### Grok Build
+
+Update:
+
+```text
+codex plugin marketplace upgrade dryforge
+```
+
+
+**Auto-update:** on. New releases load at the start of each session.
+
+
+</details>
+
+<details>
+<summary><b>Grok Build</b></summary>
+
+
+Install:
 
 ```text
 grok plugin marketplace add prekuter/dryforge
 grok plugin install dryforge --trust
 ```
 
-### GitHub Copilot CLI
+
+Update:
+
+```text
+grok plugin update dryforge
+```
+
+
+**Auto-update:** on. New releases load at the start of each session.
+
+
+</details>
+
+<details>
+<summary><b>GitHub Copilot CLI</b></summary>
+
+
+Install:
 
 ```text
 copilot plugin marketplace add prekuter/dryforge
 copilot plugin install dryforge@dryforge
 ```
 
-### Antigravity CLI
+
+Update:
 
 ```text
-agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
-```
-
-Antigravity namespaces plugin commands: `/dryforge:ready`, `/dryforge:go`, and `/dryforge:migration`.
-
-### Updates
-
-Codex checks for new releases at the start of each new session and applies them automatically.
-
-Claude Code updates automatically when auto-update is enabled for dryforge under `/plugins -> installed -> dryforge -> auto-update`. Otherwise, update manually:
-
-```text
-# Claude Code
-/plugin marketplace update dryforge
-/plugin update dryforge@dryforge
-
-# Codex
-codex plugin marketplace upgrade dryforge
-
-# Grok Build
-grok plugin update dryforge
-
-# GitHub Copilot CLI
 copilot plugin update dryforge
+```
 
-# Antigravity CLI
+
+**Auto-update:** off by default. Add `"autoUpdate": true` to the dryforge entry under `extraKnownMarketplaces` in `~/.copilot/settings.json`.
+
+
+</details>
+
+<details>
+<summary><b>Antigravity CLI</b></summary>
+
+
+Install:
+
+```text
 agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
 ```
 
-## System Definition
 
-dryforge is not a bundle of a planner, an orchestrator, and a memory system. Those labels describe components, but they miss the system they implement.
-
-dryforge is a bounded-autonomy plugin harness for capable coding agents. It provides an execution environment in which the model's decision authority, sources of truth, completion evidence, and persistent project context have explicit boundaries.
-
-The model still does the reasoning. dryforge does not replace judgment with a prescribed workflow or attempt to enumerate every case the model may encounter. It defines the conditions under which judgment is safe to exercise:
-
-| Authority source | Owns | Does not own |
-|---|---|---|
-| user | intent, preferences, and trade-off decisions | implementation mechanics |
-| specification | behavior, invariants, scope, and interface contracts | scheduling |
-| plan | work targets, dependency order, and execution structure | required behavior |
-| code | current implementation facts and project conventions | desired behavior |
-| evidence | whether execution is complete | what should have been built |
-| project harness | durable project constraints and knowledge | unilateral intent for the current task |
-
-This separation matters because agent failures are often authority failures disguised as reasoning failures. A model may infer an unstated product rule from a familiar pattern, treat current code as proof of intended behavior, reinterpret a specification to fit an easier implementation, or accept its own summary as evidence that the work succeeded. Each step can sound reasonable in isolation while moving the result away from the user's intent.
-
-dryforge keeps those sources distinct and resolves conflicts deliberately. The user owns intent. The specification owns required behavior. Existing code provides implementation facts, not automatic product authority. Evidence, not confidence, owns completion.
-
-The current specification and the project harness operate at different scopes. The specification governs one task; the harness governs durable project constraints. If a task must change an existing project constraint, neither source silently overrides the other. The user approves the change and both are brought back into agreement.
-
-```mermaid
-flowchart LR
-    I["User intent"] --> R["ready"]
-    R --> C["Executable contract"]
-    C --> G["go"]
-    G --> V["Verified change"]
-    G --> H["Project harness"]
-    H -. "context for the next cycle" .-> R
-    C -. "archived after approval" .-> A["Local contract archive"]
-
-    E["Existing codebase"] --> M["migration"]
-    M --> H
-```
-
-The plugin exposes three explicitly invoked entry points into this operating model:
-
-| Entry point | Purpose | Produces |
-|---|---|---|
-| `ready` | resolves the decisions implied by the work and establishes implementation authority | an executable contract |
-| `go` | executes the approved contract without silently redefining product intent; unresolved authority conflicts return to the user | verified changes and updated project context |
-| `migration` | establishes trustworthy project context for an existing codebase | the initial project harness |
-
-## Structural Failure Model
-
-Modern coding models are already capable of producing substantial implementations. The recurring problem is not simply insufficient model capability. It is the structure around that capability.
-
-An ordinary session begins with an input that is necessarily incomplete. The model fills gaps from training priors and the visible codebase, implements the resulting interpretation, evaluates the work from the same perspective that produced it, and leaves important rationale in a transcript. If the interpretation was wrong, the expensive correction happens after code exists. If the implementation was accepted, the next session inherits the code but not necessarily the reasons, rejected alternatives, operating constraints, or domain rules behind it.
-
-Several failure pressures reinforce one another:
-
-| Failure pressure | Typical consequence |
-|---|---|
-| underspecified intent | a plausible default becomes an unintended product decision |
-| authority drift | code, a plan, or model preference overrides the user's actual requirement |
-| self-validation | the same interpretation produces the work and certifies it |
-| incentive drift | the agent satisfies visible gates or checklists instead of the underlying objective |
-| context loss | future sessions reconstruct intent from incomplete implementation evidence |
-| uniform process | trivial work pays unnecessary overhead while risky work receives insufficient scrutiny |
-
-dryforge treats these as related system problems. Clarification, specification, execution, verification, and durable context are designed around a shared authority model rather than connected as independent utilities.
-
-## Bounded Autonomy
-
-Bounded autonomy means that the model has broad freedom inside an explicit authority boundary and no permission to silently move that boundary.
-
-This is different from both a bare agent and a highly prescriptive harness. A bare agent has too much freedom at the point where the user's meaning is still incomplete. It can turn plausible defaults into invisible requirements. A prescriptive harness has the opposite problem: when the procedure becomes too detailed, the model can optimize for the procedure instead of the work.
-
-dryforge uses a floor rather than a ceiling. It fixes the minimum conditions that must hold: intent must be grounded, behavior must have an authority source, dependencies must be explicit, completion must have evidence, and durable project knowledge must survive the run. Above that floor, the model remains free to reason, investigate, choose implementation techniques, and adapt to the actual codebase.
-
-The floor is selective. Prose stays flexible where flexibility improves reasoning. Structure becomes rigid only where another process must consume it deterministically, such as the dependency graph used for execution. A requirement is recorded once at the correct authority level rather than repeated across several checklists that can drift apart.
-
-The floor is also proportional. A small mechanical edit should not pay the coordination cost of a risky multi-part change. A thin idea, however, does not justify a thin specification: when less can be derived from the input, more intent must be established before implementation begins. Cost is reduced by removing work that does not change the outcome, not by lowering the evidence required for the outcome.
-
-## Operating Lifecycle
-
-<p align="center">
-  <img src="assets/how-dryforge-works-en.png" width="800" alt="How dryforge works" />
-</p>
-
-For new work, `ready` and `go` form one continuous cycle:
+Update:
 
 ```text
-ready -> contract approval -> go -> result approval -> archive -> next cycle
+agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
 ```
 
-The first cycle does more than describe the immediate task. It also captures the project-wide context needed to make the implementation coherent and to create the initial project harness. That context informs the work but does not expand the task's implementation scope.
 
-On later cycles, `ready` begins from the existing harness and establishes authority only for the new change. After execution, `go` checks the completed implementation against the harness in both directions: project constraints must still be honored, and any constraint intentionally changed by the task must be updated where future agents will read it. Only the affected project context is revised.
+**Auto-update:** not available. Run the install command again to update.
 
-`ready` and `go` are designed to run in the same session, but the executable contract remains the authority between them. The live conversation can help judgment; it cannot substitute for a missing or incomplete contract.
 
-For an existing codebase, `migration` runs first as a separate onboarding cycle. Once the initial harness is established, the project joins the same `ready -> go` lifecycle as new work.
+</details>
 
-## From Intent to Authority
+<a id="the-problem"></a>
 
-`ready` converts input into implementation authority. It is not a plan formatter and does not assume that a detailed input is correct merely because it is detailed.
+# Everyone has been using agents wrong.
 
-Every input begins as material: an idea, a requirements document, a draft plan, generated text, design notes, or a mixture of them. Material may contain facts, preferences, proposed solutions, contradictions, and accidental assumptions. `ready` separates these before writing the specification so that improving the prose does not silently strengthen an unsupported claim.
+Coding agents already know how to work. What they don't have is your intent.
 
-Premature code or configuration in the input is treated the same way. Behavior that can be derived from it is translated into a behavioral contract; exact form is preserved only when that form is itself an intentional, non-reconstructible decision. Preservation is deliberately keep-biased: an executor can discard surplus source detail, but intent omitted from the contract is usually unrecoverable after the conversation ends.
+The industry filled that gap with process. Workflows, methodologies, rules, swarms of agents — all fixed before anyone asks what you are building. The method comes first, and your intent is cut to fit it. Your intent should decide the method. Instead, the method decides your intent:
 
-The central task is to identify the decision surface of the requested change: the set of choices that materially alter behavior, data, boundaries, failure handling, security, or user experience. The model reasons broadly about that surface, but it does not turn every conceivable detail into a question.
+> *"We write tests first. Now — what are you building?"*
 
-Decisions are handled according to what can ground them:
+It runs backwards. Once the intent is clear, the method follows from it. Fixing the method first is not rigor. It only means no one listened first.
 
-| Decision type | Treatment |
-|---|---|
-| already implied by stated goals and constraints | derive it and preserve the reasoning |
-| product, policy, or domain choice that remains open | ask the user precisely where the answer changes the result |
-| technical choice with meaningful trade-offs | present concrete options and a recommendation |
-| harmless implementation tuning | leave it to execution |
+And every one of those rules was written before anyone saw your work, for whichever model was current when it was written. When the next model arrives, the rules no longer fit, and the whole setup is torn down and rebuilt. Again.
 
-This asymmetry is deliberate. Product intent cannot be recovered reliably from an implementation after the fact, while many local implementation choices can. `ready` therefore spends user attention on decisions whose absence would force the agent to invent authority.
+- **Workflows** script how the agent works, so every new model breaks them — and the model takes the blame.
+- **Test-first as law** puts the same ceremony on a config file and a payment rule.
+- **Subagent swarms** guess an unstated intent in parallel and bill the tokens as progress.
+- **Loops** run for hours toward a goal nobody pinned down.
+- **Questions** are a step in the procedure. They ask what the code already answers, while the decisions that are yours get made in silence. The most dangerous question is the one never asked.
+- **Human checkpoints** land on every step of the process instead of on the decisions only you can make.
+- **Spec documents** are generated for the ritual, then drift from the code and stop being read.
 
-Question count is not a quality metric. The system first attempts to derive an answer from established goals, constraints, and code facts. It asks only when a specific unresolved decision remains, the existing material does not settle it, and choosing incorrectly would change the outcome. This produces fewer generic questions while making hidden, load-bearing assumptions visible.
+The problem nobody solved is the first one: understanding what you actually mean.
 
-The result is an executable contract: a durable statement of what must be true, how the work is divided, and which parts of the original intent cannot be reconstructed from code alone.
+<a id="approach"></a>
 
-## The Executable Contract
+# Fundamentally Different Approach
 
-The contract is stored as plain Markdown under `.dryforge` and has three responsibilities:
+Agents have become capable enough to be given real autonomy. The question is no longer whether to let them decide. It is what they may decide.
 
-| Artifact | Responsibility |
-|---|---|
-| specification | authoritative behavior, constraints, invariants, edge cases, interfaces, and required verification |
-| plan | implementation tasks, their behavioral contracts, and their dependency graph |
-| handoff | document authority, execution boundaries, and intent that future executors must not re-derive |
+There have been two answers, and both are wrong.
 
-The distinction prevents a common collapse in which requirements, implementation ideas, and scheduling notes are treated as equally authoritative. The specification defines the result. The plan describes how to reach it. If they disagree, the specification wins. If the specification itself appears wrong or incomplete during execution, the agent returns to the user rather than quietly correcting the authority source in its own favor.
+- **Hold the agent too tight**, and you get process: every step scripted, every case enumerated in advance. It props up a weak model and caps a strong one. The better the model gets, the more the procedure holds it back.
+- **Let the agent go**, and you get a bare agent: free where it should be free, and free where it should not be. It decides what you meant, and fills every gap with a plausible guess.
 
-The contract combines expressive prose with one machine-readable scheduling structure. Intent and constraints need language rich enough to preserve nuance. Dependency scheduling needs a deterministic graph that can be validated before work begins. Keeping rigidity at this seam allows the rest of the contract to remain readable and adaptable.
+dryforge's answer is the third: bounded autonomy, anchored in your intent. The agent has full freedom inside a boundary it may not move on its own — and that boundary is your intent.
 
-On the first cycle of a new project, the contract also establishes the project-wide foundation needed for future work. Later cycles read the existing project harness and focus the contract on the current change. This avoids repeatedly designing the project from scratch while keeping planned future work out of permanent project rules before it exists.
+**Agents rarely fail for lack of intelligence.** Most of their failures are failures of authority, dressed up as failures of reasoning. An agent infers a product rule no one stated. It treats the code that exists as proof of what was intended. It reinterprets a requirement into something easier to build. It takes its own summary as proof that the work is done. Each step sounds reasonable on its own. Together, they carry the result away from what you wanted.
 
-## Spec-Bound Execution
+**So dryforge separates authority.** On top of bounded autonomy, dryforge built its own authority model:
 
-`go` treats the approved contract as execution authority. It may choose how to implement the work, investigate the repository, and adjust technical tactics, but it may not replace the specified behavior with a more convenient interpretation.
+- Every decision in the work has an owner. What is yours comes back to you, whatever form it takes. What is the agent's, the agent decides with everything it has.
+- What can be found out is not asked. What is yours is never guessed.
+- When sources disagree, nothing is chosen quietly. The conflict comes to you.
+- No process decides what is yours, and nothing that is yours is decided without you. A guess is worse than a pause.
 
-Before making expensive or stateful changes, `go` validates the contract, repository state, and dependency graph. This catches an invalid plan or unsafe base before execution creates more state to unwind. Independent tasks may run concurrently only after their dependencies and shared boundaries are explicit.
+**The rest of the design follows from it.**
 
-Execution scales with the work. Low-risk sequential changes can run directly. Risky work receives isolation and independent verification. Truly independent tasks can run concurrently, while external or stateful work must produce observable external evidence rather than relying on a file diff. Isolation is never assumed to cover shared services or runtime resources merely because file changes are separate.
+- **A floor, not a ceiling.** dryforge fixes only what must hold, and leaves the reasoning open. A better model raises the ceiling by itself.
+- **Trust the reasoning, not the self-verdict.** The agent's judgment is trusted. Its judgment of its own work is not. Whether something is done is decided by evidence, not by the agent's word.
+- **Effort in proportion.** Effort scales with the risk of the work. A small change stays small; a risky one gets the rigor it needs. Thoroughness for show is a failure, not a virtue.
+- **Protect the goal, not a proxy.** Every rule, checklist, and gate a harness adds can become the thing the agent optimizes instead of the work. dryforge adds none of them for their own sake. It arranges the work so that the shortest path is the one that serves your intent.
 
-Parallelism is an execution optimization, not a planning method. The system does not ask several agents to invent competing interpretations of an unresolved request. Direction is settled first; parallel work begins only when tasks can execute against the same approved contract.
+**It changes where you stand.** You are not asked to supervise every step, approve every stage, or answer what the code could have told the agent. You are called in where the decision is yours, and only there. You stay the author of what gets built, and you know why it is the way it is.
 
-Integration is treated as its own responsibility. A task is not accepted merely because a worker reports success. The actual changes and evidence are checked, dependencies are integrated in order, and the combined result is verified in the state the user would receive.
+Because the boundary does not move, everything inside it can run at full strength.
 
-Final integration remains under user control. dryforge can prepare and verify the result without treating permission to implement as permission to rewrite history, merge an unapproved branch, or conceal a dirty base.
+<a id="dryforge"></a>
 
-## Evidence-Backed Verification
+# Definition of dryforge
 
-Completion is an evidence claim, not a confidence statement.
+dryforge carries your intent from the first question to proven work, and never loses it on the way.
 
-Every execution path keeps an evidence floor. The exact evidence depends on the project and specification, but it must establish the asserted behavior rather than merely show that a command ran. Relevant evidence may include targeted tests, full test suites, type or build checks, inspected diffs, runtime smoke checks, external state reads, or other observable results.
+It is not a bundle of spec-first, test-first, and parallel-agent rituals. Everything in it follows from one principle: whose decision it is.
 
-An unevaluable check is a failure. If a command exits before reaching its assertion, a service cannot be observed, or an external operation leaves no inspectable result, the system does not infer success from the absence of a visible error.
+## Intent, understood
 
-Verification depth then rises with risk. Mechanical work can be checked directly. Changes involving state transitions, security boundaries, external systems, concurrency, or broad integration require stronger and more independent evidence. Affected-only checks can shorten intermediate feedback, but they do not replace the final project-level verification required by the contract.
+This is where dryforge begins, and where it breaks from everything else.
 
-dryforge also separates verification perspectives. The same context is not handed indiscriminately to every check, because more context can create anchoring rather than better judgment. One perspective can examine whether the written contract faithfully captures established intent. Another can judge whether the contract is complete enough to execute without access to the original conversation. Implementation checks work from raw changes and required behavior rather than an implementer's persuasive summary. Final verification sees the integrated result.
+It reads what you bring as material, not orders. A detailed document is not assumed right because it is detailed, and a rough one is no excuse to guess. Nothing you said is quietly rewritten into something you didn't mean.
 
-This is not review by repetition. Each perspective receives the evidence needed to find a different class of defect, and independence is preserved where self-confirmation would be most likely.
+Most tools then ask the way a form does — a fixed list, one field at a time, in the order the procedure needs — or they don't ask at all, and guess. dryforge asks the way a senior engineer does, after reading everything first.
 
-## Reward-Hack Resistance
+The more it understands what you are trying to do, the less it needs to ask. Whatever you have already made clear — in your words, your material, or your code — it settles on its own, and does not ask again.
 
-Agent harnesses create incentives. Whatever is made easiest to observe can become the thing the model optimizes, even when it is only a proxy for the real work.
+Most of what matters is never said. So it thinks through the parts you never mentioned, and asks only what is yours to decide — because the decision belongs to you, not because a procedure has a step for questions.
 
-A detailed checklist can become a box-filling objective. A downstream review gate can encourage the upstream process to produce artifacts shaped to pass that gate. A generated project-document schema can cause the agent to write generic sections because the slots exist, whether or not the content has durable value. Adding more instructions does not necessarily fix these failures; it can make the proxy more elaborate.
+- Questions about what you want go straight to you.
+- When a decision is yours but technical, it comes with options and a recommendation, so you can decide without being an engineer.
+- The thinner your input, the deeper it asks. A one-line idea does not get a one-line design.
 
-dryforge addresses reward hacking structurally.
+Nothing that is yours is decided in silence. Anything decided on your behalf is flagged before you approve.
 
-Responsibility stays upstream. Intent must be complete before the contract is authored, rather than delegated to a later reviewer. An implementer must produce evidence before integration, rather than relying on a final gate to discover missing work. Verification remains insurance, not the hidden specification.
+You answer only the questions that are yours, and every one of them matters. The conversation ends; the intent does not. It is written down to stand on its own, without the conversation behind it.
 
-Information is limited by purpose. Checks that should judge an artifact on its own are not given the author's full reasoning trail. Implementation is judged against required behavior and observable changes, not against the worker's account of why the result should be accepted.
+## Intent, realized
 
-Generated project context is selected by value rather than by template completion. Knowledge belongs in the harness when it changes future work and cannot be recovered cheaply and reliably from the repository. Empty ceremony, generic advice, and descriptions of dryforge itself do not become permanent project documentation.
+What you approved is carried out as you meant it — not traded for an easier version, and not left at code that merely runs. If reality pushes back along the way, dryforge does not bend your intent to fit. It comes back to you.
 
-The objective is not to constrain the model until it cannot take shortcuts. It is to arrange authority, evidence, and information so that the shortest valid path is aligned with the user's intended result.
+The work gets as much structure as it needs, and no more. Tests, parallel work, isolation, independent review: all there, used when the work calls for them, never as ceremony. No agents are spun up just to look busy.
 
-## Cost Model
+Done means verified — by checks that actually ran. A check that could not run is a failure, not a pass.
 
-dryforge treats cost as resource allocation across the whole run: user attention, model context, generated output, subprocesses, review, retries, and wall-clock time.
+What goes back into your project reflects both what you decided and what was actually built.
 
-The largest avoidable cost is often wrong-direction work. Clarifying a load-bearing decision before implementation is usually cheaper than implementing a plausible assumption, reviewing it, correcting it, and explaining the project again in the next session. The executable contract moves this cost forward, where it is smaller.
+## Intent, kept
 
-Persistent project context reduces recurring discovery. Future sessions do not need a full transcript or repeated repository archaeology to recover stable rules, operating constraints, and reasons that code cannot prove. The harness keeps high-value knowledge resident while allowing derivable detail to remain in the codebase.
+What was decided, and why, stays in your project. Each turn of the loop starts from everything the last one settled, so the questions get sharper and fewer as the project grows. The longer you use it, the better it knows your project.
 
-Within a run, dryforge controls cost in several ways:
+It is kept as plain documents in your repository, not inside a tool. Switch agents, and your project comes with you.
 
-| Cost surface | Control |
-|---|---|
-| user attention | ask only when an unresolved decision has a concrete consequence |
-| context usage | give each task and verification perspective only the material needed for its responsibility |
-| model output | prefer structured results and silence between meaningful interaction points |
-| agent dispatch | isolate or delegate only when independence, risk, or parallelism repays the coordination cost |
-| wall-clock time | run truly independent tasks concurrently and reuse already-proven results where valid |
-| retries | bound repeated attempts and escalate when new evidence is no longer being produced |
+It attaches to the agent you already use and is not tuned to any model. One skill source runs on Claude Code, Codex, Grok Build, GitHub Copilot CLI, and Antigravity CLI; adding an agent took packaging alone.
 
-Cost controls never redefine success. A cached result can be reused only when it still proves the relevant state. A narrower check can accelerate an intermediate step but cannot certify unrelated integration. Parallelism is used only when shared runtime state does not turn it into contention or nondeterminism.
+<a id="getting-started"></a>
 
-The aim is not minimal token use or maximal agent activity. It is the least total work that preserves authority and produces sufficient evidence.
+# Getting Started
 
-## Persistent Project Context
+## Commands
 
-The project harness is the durable context layer that future agents read before working. It is not a transcript summary or a single memory file. It is a small, project-owned documentation system placed at standard agent entry points.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/readme/loop-light.svg">
+  <img alt="New project: ready. Existing codebase: migration once. Then ready and go, in a loop, with what stays in your project." src="assets/readme/loop-light.svg" width="100%">
+</picture>
 
-| State layer | Lifetime | Authority |
-|---|---|---|
-| executable contract | one task cycle | the current task |
-| project harness | the project lifetime | durable project constraints and knowledge |
+<!-- demo: vanilla agent vs dryforge (GIF) -->
 
-A typical harness may contain:
+Start a new project with `ready`. Bring an existing codebase in with `migration`, once. From then on, `ready` and `go` are the whole loop — no workflow to learn, nothing to configure. Two moments are always yours: approving your intent before anything is built, and accepting the result.
+
+It works in whatever language you write in, and between a question and a result it stays quiet. Use it where a wrong assumption would be expensive: new projects, features, changes that cross the codebase. A small, already-clear edit doesn't need it.
+
+Use `/ready`, `/go`, and `/migration`. In Codex, the prefix is `$`: `$ready`, `$go`, `$migration`.
+
+### ready
+
+```text
+/ready <anything>
+```
+
+Bring whatever you have — a one-line idea, a brainstorm, a vague spec, a PDF, a plan another tool wrote, or all of it at once. No need to clean up your thinking or fit it into a format.
+
+ready reads your project, works out what you mean, and asks only what it needs from you. When every open decision is settled, it hands you the result to approve: your intent, drafted in plain Markdown under `.dryforge/` on your machine. Nothing is built until you approve it. Then run `go` in the same session. If the session ends first, `/go` picks up the approved intent from `.dryforge/` in a new one.
+
+No repository yet? ready offers to set one up.
+
+### go
+
+```text
+/go
+```
+
+It realizes what you approved and verifies it. It speaks up only for results and real blockers — and if the work would change what you asked for, it stops and asks. When the work is done, it reports the result and what changed in your project docs.
+
+Your repository stays yours. A new project is built directly on main. On an existing project the work happens on its own branch, and when it is done, go asks how you want it integrated — merge, pull request, or leave it as it is. It never merges on its own.
+
+### migration
+
+```text
+/migration
+```
+
+Code shows what was built, not what was meant. It can prove that an authorization check exists; it cannot prove that the check is the whole policy.
+
+migration reads your codebase and works out what it can on its own. Then it asks about what code cannot tell it — the business rules, the security policy, which parts are intentional and which are just history. Existing docs are weighed, not trusted, and it tells you what it kept, what it dropped, and why.
+
+It writes your project's documentation and leaves the commit to you. If you already have CLAUDE.md or AGENTS.md, it reviews them with you, backs them up, and rewrites them with your approval. Run it once, commit, and start a fresh session. From then on, the project lives in the `ready` → `go` loop.
+
+## What stays in your project
 
 ```text
 your-project/
-├── CLAUDE.md
-├── AGENTS.md
+├── CLAUDE.md                 # read first by Claude Code
+├── AGENTS.md                 # read first by Codex and other agents
 ├── docs/
-│   ├── architecture.md
-│   ├── business-rules.md
-│   ├── security.md
-│   ├── standards.md
-│   ├── engineering-notes.md
-│   ├── operations.md
-│   ├── contracts.md
-│   └── tracking/
-└── <module>/AGENTS.md
+│   ├── architecture.md       # how the system fits together
+│   ├── business-rules.md     # how the product must behave
+│   ├── security.md           # who may do what, and what is protected
+│   ├── standards.md          # the rules that must not break
+│   ├── engineering-notes.md  # traps and non-obvious mechanisms
+│   ├── operations.md         # setup, build, deploy
+│   ├── contracts.md          # what goes in and out
+│   └── tracking/             # where the project stands, and the decisions behind it
+└── <module>/AGENTS.md        # local rules for each part of the codebase
 ```
 
-The top-level documentation slots are stable; module-level instructions and retained content follow the project. The harness is not valuable because every slot exists. It is valuable because each retained statement changes how future work should be done.
+Each turn of the loop leaves your project's intent written down — the decisions, the reasons, the rules the code can't show. Only what matters stays. Each run keeps what it touches in step with the code, so it sharpens instead of piling up. The next `ready` starts from it.
 
-Knowledge belongs in the harness when it is project-specific, consequential, and not reliably derivable from code or ordinary tooling. Typical examples include domain invariants, security policy, reasons behind architectural constraints, operational procedures, known traps, active decisions, and module boundaries. Source listings, obvious framework conventions, temporary implementation narration, and generic engineering advice do not qualify merely because they might be useful someday.
+It is plain Markdown, written in the language you work in, at the entry points coding agents already read. The documents describe your project, not dryforge. Any agent, in any session, works from them — with or without dryforge. Remove the plugin and they stay.
 
-Each document stays at one level of abstraction and remains understandable on its own. Project-wide entry files route agents to the relevant context. Module-level instructions narrow the scope where local rules differ. Tracking material records durable state rather than replaying session activity.
+dryforge runs only when you call it. What it leaves behind keeps working.
 
-The harness is updated from the actual completed change, not from the plan alone. This keeps permanent project context aligned with what now exists and avoids recording speculative future behavior as a current invariant.
+The working record of each task stays under `.dryforge/`, local to your machine. What matters moves into `docs/` and goes into your repository with the rest of your work.
 
-Completed contracts are archived locally under `.dryforge`, while the project-facing harness remains ordinary, commit-ready Markdown. The generated documents describe the project, not dryforge. If the plugin is removed, the project keeps the useful asset without a proprietary runtime or document format.
-
-## Existing-Project Migration
-
-Existing projects need a different starting point. They already contain implementation history, documentation of uneven reliability, conventions, implicit owner knowledge, and possibly instructions created for other agent systems.
-
-`migration` establishes the initial project harness without pretending that repository observation is the same as project truth.
-
-The codebase is scanned as an observable ledger: structure, entry points, interfaces, data boundaries, tests, deployment mechanisms, and current behavior can often be established directly. Existing documentation is evaluated against the code and either retained, improved, folded into the new structure, or left out when it is stale or duplicative.
-
-Inference is proportional to consequence. Low-risk technical facts can usually be derived and recorded. Product rules, business policy, security intent, and dangerous operational assumptions require owner confirmation when a false inference would mislead future work. Code can prove that an authorization check exists; it cannot prove that the current check expresses the complete intended policy.
-
-The resulting harness is independently evaluated as project documentation: it must match the repository, preserve consequential owner knowledge, avoid unsupported claims, and remain useful without knowledge of the migration session.
-
-Migration creates documentation and local initialization state. It does not treat onboarding as authorization to create commits, change branches, rewrite existing history, or begin unrelated implementation. After migration, the project uses the normal `ready -> go` cycle.
-
-## Runtime Safety and Recovery
-
-dryforge validates cheap preconditions before mutation. Contracts, dependency graphs, and repository state are checked before execution creates more state to unwind. External or stateful work must define observable evidence instead of borrowing confidence from a file diff.
-
-When required evidence is missing, further execution stops. Failed isolated work is preserved for diagnosis, independently completed work is retained where safe, and temporary resources are not cleaned unless ownership is established. The system reports the last state it can actually prove instead of presenting a partially verified result as complete.
-
-Retries are bounded by new information. Repeating the same failing action without a changed hypothesis, environment, or input is not progress. When the remaining decision belongs to the user or an external condition cannot be established, dryforge escalates with the evidence gathered so far.
-
-Detection and diagnosis are separate responsibilities. The system must reliably detect that a required assertion was not proven; it does not fabricate a precise cause when the available evidence supports only a narrower conclusion.
-
-## Interaction Model
-
-dryforge runs only when explicitly invoked. It does not silently convert ordinary coding requests into its full workflow.
-
-Conversation follows the user's language and stays focused on decisions, results, and blockers. Technical artifacts remain precise even when the conversation is informal. Internal control vocabulary is not pushed into user interaction unless a term is necessary to explain authority or make a decision.
-
-The system is deliberately quiet between meaningful interaction points. Progress narration is not a substitute for useful state, and large internal analyses are summarized into the information the user needs to approve, correct, or continue the work.
-
-dryforge is most useful for features, project setup, migrations, and changes where a wrong assumption or weak verification would be expensive. Tiny, fully specified mechanical edits usually do not need the complete cycle.
-
-## Portability and Source Integrity
-
-dryforge is stack- and language-independent. It discovers the repository's actual tools, conventions, and verification methods at runtime rather than encoding one framework's workflow into the product.
-
-Claude Code, Codex, Grok Build, GitHub Copilot, and Antigravity CLI distributions are generated from the same platform-neutral skill source. Only the packaging for each plugin system differs.
-
-The same portability principle applies to project output. Contracts and project context use plain Markdown and standard agent entry files. The project remains understandable and operable without dryforge-specific document readers.
-
-## Requirements
+# Requirements
 
 > [!IMPORTANT]
-> Git is required. Before `go` executes, the tracked working state must be clean; when the main branch tracks a remote, it must not contain unpushed commits. This keeps unrelated work out of the execution and verification boundary.
+> Git is required. Before `go` runs, the working tree must be clean — no uncommitted or untracked files outside `.dryforge/` — and if your main branch tracks a remote, it must have no unpushed commits.
 
-## License
+# License
 
 [GNU Affero General Public License v3.0 only](LICENSE) (`AGPL-3.0-only`).
 
 <br />
 
-<div align="center"><sub><a href="#top">back to top</a> · © 2026 prekuter · AGPL-3.0-only</sub></div>
+<div align="center">
+
+<img src="https://dryforge.dev/logo-mark.svg" width="40" height="40" alt="dryforge">
+
+<sub><a href="#top">back to top</a> · <a href="https://dryforge.dev">dryforge.dev</a> · © 2026 prekuter · AGPL-3.0-only</sub>
+
+</div>
