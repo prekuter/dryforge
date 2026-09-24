@@ -1,10 +1,15 @@
 # Changelog
 
+## v1.3.1 (2026-09-24)
+
+- Rewrote the README in English and Korean, with light and dark graphics and per-agent install and update instructions
+- No changes to skills
+
 ## v1.3.0 (2026-09-24)
 
 - Added native Antigravity CLI packaging with official manifest, plugin rules, and namespaced skill commands
 - Verified manual-only invocation across ordinary prompts and explicit ready, go, migration, subagent, and parallel worktree flows
-- Extended reproducible builds, release validation, dogfood tooling, README guidance, and the website for Antigravity CLI
+- Extended reproducible builds and package validation to Antigravity CLI, and added its install guide to the README
 
 ## v1.2.0 (2026-09-23)
 
