@@ -85,7 +85,7 @@ where the input came from. The 3-doc contract is in `references/output-format.md
   Reading references, reading the input / code / notes,
   writing the docs, and dispatching a review are all **internal** — never announce them, and **never
   narrate the transition between steps.** No transition lines — "now I'll write the plan", "먼저 양식을
-  확인하고", "let me read the guide", "Now I'll dispatch the review", "Now the spec…" (announcing each
+  확인하고", "let me read the guide", "Now I'll dispatch the review", "Now the spec..." (announcing each
   document as you write it) all leak. (Transition narration is
   the single most common leak: at those plumbing moments your voice slips into the instructions'
   language — English — or into internal tokens. The cure is to emit *nothing* there, not to translate

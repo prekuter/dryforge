@@ -62,7 +62,7 @@ When done: commit, then return ONLY the structured summary. Do not inline diffs.
   external-config), the work target touched plus the commit that records it
 - `verification`: the **literal command(s) run and their exit codes** (evidence, not "passed") —
   for a testable task, the tests added + their run; for a non-unit-testable deliverable, the gate
-  actually run (build / validate / render / …). A claimed pass with no command/exit code is
+  actually run (build / validate / render / ...). A claimed pass with no command/exit code is
   needs-fix; and **omitting tests on a task that has real testable behavior is needs-fix** (the
   no-test path is only for genuinely non-unit-testable or trivial work)
 - `concerns`: anything the orchestrator should weigh (or what is blocking)

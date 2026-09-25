@@ -12,7 +12,7 @@ is ORIENT's, spec↔plan trace is PLAN's trace gate, source conflicts are DECOMP
 
 ## Depth probe — coverage vs floor, per axis
 
-After CALIBRATE has set the floor, measure each axis (domain, technical, security, …) for **depth
+After CALIBRATE has set the floor, measure each axis (domain, technical, security, ...) for **depth
 proportional to the project's character**: are the rules verifiable (a test case derivable from
 each), or do they stay at generalities? The gap is `floor − coverage`, where *coverage* is the
 **measured depth**, not the mere presence of content: DECOMPOSE supplies a **presence map** (what landed
@@ -42,7 +42,7 @@ deliberately **liberal** — they raise more than survives — so every candidat
   schema/null-handling/lineage. If silent on a kind its domain implies, do **not** invent the rule
   (no fabrication) — surface the silence as a candidate.
 - **Completeness sweep** — when a requirement is cross-cutting (auth, permission, row/tenant scoping,
-  auditing, …), enumerate **every** site it must apply to and flag any missing site.
+  auditing, ...), enumerate **every** site it must apply to and flag any missing site.
 - **Cardinality-coupling probe** — when the work **adds to or removes from a collection** (registry
   entries, enum members, a rule/command set, a route table), scan the existing code/tests for sites
   that **hard-code the old count or the exact member set** (a length assertion, a frozen name-set, a

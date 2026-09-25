@@ -63,7 +63,7 @@ migration is an independent piece of work, and a fresh session keeps the task-le
   loop are **silent phases**: the UI already shows the file/command activity, so narrating it is pure
   leak. If what you are about to emit is none of (a)/(b)/(c), the correct output is **nothing**.
   **Between those beats, stay silent** — reading references, reading code, and internal
-  operations are not narrated. **No transition lines** ("now I'll…", "먼저 …", "let me read…", "Now the …" announcing each write) — at
+  operations are not narrated. **No transition lines** ("now I'll...", "먼저 ...", "let me read...", "Now the ..." announcing each write) — at
   those plumbing moments your voice slips into the instructions' language (English) or internal tokens;
   emit *nothing* there, don't translate it. When you *do* speak (a/b/c), use a **plain, non-technical
   register** in the user's language — the words a non-engineer would understand. This is your default
@@ -98,7 +98,7 @@ stop once you can ground ELICIT's questions; deep-read only where you must.
 Cover:
 - **Directory structure** → identify the tech stack and the module/service boundaries.
 - **Code patterns** → conventions, naming, test structure, build system.
-- **Existing docs** (CLAUDE.md, README, docs/, AGENTS.md, …) → list them and **demote to reference
+- **Existing docs** (CLAUDE.md, README, docs/, AGENTS.md, ...) → list them and **demote to reference
   material** (not authority — they may be stale or wrong).
 - **External dependencies** → auth, data storage, cache, external APIs.
 - **git history** → activity scope, the major change patterns.
@@ -135,8 +135,8 @@ what to improve — then present the review to the user, explain it, and get app
 Explore sources fully before writing; verify each file against the code both ways (omission /
 hallucination) as you go — this self-check is separate from Phase 4.
 
-**Write every file silently** — do not announce each file or section as you go ("Now the docs…",
-"이제 모듈 AGENTS.md를…", "Now the entry point"); the UI already shows each write. This multi-file
+**Write every file silently** — do not announce each file or section as you go ("Now the docs...",
+"이제 모듈 AGENTS.md를...", "Now the entry point"); the UI already shows each write. This multi-file
 writing sequence is where narration leaks most — emit nothing between writes.
 
 ## Phase 4 — REVIEW (verify quality) — `references/harness-review.md`

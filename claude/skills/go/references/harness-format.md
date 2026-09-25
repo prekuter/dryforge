@@ -196,7 +196,7 @@ of information, not a stack or domain — if the project has none of that kind, 
   targets (the concrete list of events that must be recorded); credential management (lifetime ·
   revocation · storage · rotation); sensitive-data policy (what is sensitive and how it is handled).
 - **Exclude**: domain rules; system topology.
-- **Quality floor**: the auth flow names failure paths (bad credential, expiry, lockout, …), not
+- **Quality floor**: the auth flow names failure paths (bad credential, expiry, lockout, ...), not
   just the success path; authorization states what is *explicitly not allowed*, not only what is;
   audit targets enumerate concrete events, not "sensitive operations"; credentials are covered from
   creation to destruction. Not "follows security best practices" — this project's own security
@@ -222,7 +222,7 @@ of information, not a stack or domain — if the project has none of that kind, 
   *status* (→ status.md's "remaining"), not a permanent MUST/MUST-NOT. standards holds only
   permanent rules.
 - **Bar**: only what leads to a build failure / test failure / runtime error / structural mismatch
-  when violated. Preferences ("it'd be nice if…") are not rules.
+  when violated. Preferences ("it'd be nice if...") are not rules.
 - **Quality floor**: every rule has a clear violation criterion — a rule whose violation can't be
   judged is not a rule; record only rules actually in force (not planned or recommended); add a
   reason only when the rule is surprising (counter-intuitive). Not "follows clean-code principles" —
@@ -266,7 +266,7 @@ of information, not a stack or domain — if the project has none of that kind, 
   (status codes, error-body shape) — other docs don't restate that mapping.
 - **Exclude**: internal implementation; domain rules.
 - **Trait**: may be empty if there is no external interface. The interface form varies by project
-  type (API, CLI, library public surface, plugin interface, event protocol, …).
+  type (API, CLI, library public surface, plugin interface, event protocol, ...).
 - **Quality floor**: every interface point states all three of input · output · error; common
   conventions are stated once, not repeated per interface; a consumer can integrate correctly from
   this file alone — a contract you must read the code to learn is undocumented.
@@ -304,7 +304,7 @@ of information, not a stack or domain — if the project has none of that kind, 
   and record the knowledge gained in engineering-notes; if a new rule is needed, add it to
   standards. **findings is the place for "cannot be solved in the current session," not "too tedious
   to investigate."** On listing, always state *why it can't be solved now* (external dependency,
-  out of scope, needs a higher-level decision, …).
+  out of scope, needs a higher-level decision, ...).
 - **Each problem**: what is broken (reproducibly); why it matters (blast radius); why it can't be
   solved now; a possible approach (if any).
 - **Quality floor**: each problem is "under condition C, symptom S is observed," not "X is wrong";
@@ -313,7 +313,7 @@ of information, not a stack or domain — if the project has none of that kind, 
 
 ## Module AGENTS.md
 
-One per meaningful unit (module, service, package, app, …).
+One per meaningful unit (module, service, package, app, ...).
 
 - **Include**: scope (what this module owns); boundaries (what it does *not* own, what not to
   touch); invariants (what must always hold); core implementation patterns (this module's own way);

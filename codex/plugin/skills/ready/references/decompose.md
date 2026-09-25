@@ -61,7 +61,7 @@ keep/cut line is precise:
 
 | In the INPUT | Do |
 |---|---|
-| implementation code blocks (source, queries, schema/DSL, …) | convert to a behavioral contract — **delete the code only after** lifting its behavior (see below) |
+| implementation code blocks (source, queries, schema/DSL, ...) | convert to a behavioral contract — **delete the code only after** lifting its behavior (see below) |
 | feature scope, invariants, API surface, design intent | **keep** — things independent judgment could get wrong |
 | non-obvious shapes (wire format, a specific predicate, a data structure) | **keep as a code/data block** — not derivable, must be pinned |
 
@@ -153,8 +153,8 @@ Do not leave DECOMPOSE until all hold:
 
 ## What this produces (in-session, written to no file)
 
-① per-axis classified signal ② the presence map (what landed per axis + form marker) ③ conflict/dedup
-flags ④ preserved non-derivable forms. ELICIT receives these as **challengeable material** (authority demoted, utility kept — a good
+(1) per-axis classified signal (2) the presence map (what landed per axis + form marker) (3) conflict/dedup
+flags (4) preserved non-derivable forms. ELICIT receives these as **challengeable material** (authority demoted, utility kept — a good
 INPUT's content flows almost unchanged into the spec, but only after dialogue and approval confirm
 it). A thin INPUT classifies and inventories to almost nothing, with no conflicts, and passes through
 small — the same mechanism, only the volume differs.

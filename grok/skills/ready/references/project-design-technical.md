@@ -10,7 +10,7 @@ technical decisions interleave with domain in the loop and lean on the domain th
 It is the opposite of domain design. Domain *draws out* what the user knows; technical *presents*
 what the user doesn't, as options the user chooses among. The user says a generality ("I want it to
 be secure") → you translate it into concrete choices ("an external auth service vs. rolling your own;
-the latter needs these decisions…") → the user decides → their language narrows → repeat. A few
+the latter needs these decisions...") → the user decides → their language narrows → repeat. A few
 rounds converge a generality into this project's specific technical decision.
 
 **Floor, not ceiling.** You know how to present technical options. This file blocks the failure modes
@@ -36,7 +36,7 @@ and lays the floor; which options to present, in what order, is your judgment.
 ## What to cover (proportional to CALIBRATE depth)
 
 The areas a typical project's technical floor touches — **common, not a fixed catalog.** A given project
-may add others (data model / migration, observability, …) or legitimately have almost nothing in one.
+may add others (data model / migration, observability, ...) or legitimately have almost nothing in one.
 Cover what *this* project's character implies, not all four by rote.
 
 - **Architecture** — components, how they communicate, data flow.

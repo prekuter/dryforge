@@ -99,7 +99,7 @@ regen_barriers:
 ## Shared-write handling — two layers (hint + safety net)
 
 Parallel tasks must not collide on shared/registration files (an aggregator/index file, a module
-list, a routes table, …). Two layers, not a strict prediction:
+list, a routes table, ...). Two layers, not a strict prediction:
 
 1. **Hint** (prose in plan, best-effort, may be incomplete): per task, e.g. *"Do not
    write the shared registration files; a single wiring step adds all registrations at

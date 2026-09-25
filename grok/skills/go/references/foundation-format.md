@@ -43,7 +43,7 @@ keep the Foundation about the *project*, and let `go` map it to files.
 
 Begin the Foundation with an explicit label: *"Non-executable project context — `go` reads this
 section as context + harness source, not as an implementation target."* The handoff's existing
-governing parts (Document Roles, Hard Gates, conflict resolution, …) stay clearly separated from the
+governing parts (Document Roles, Hard Gates, conflict resolution, ...) stay clearly separated from the
 Foundation, so `go` never confuses a governing instruction / hard gate with project context. The
 Foundation is a **conditional expansion inside the handoff's "supplement" role**, not a new authority.
 

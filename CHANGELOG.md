@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.6 (2026-09-26)
+
+- Replaced typographic ellipses and circled numerals in skill text with plain ASCII so plugin security scanners no longer misread them; no change to skill behavior
+
 ## v1.3.5 (2026-09-25)
 
 - Relicensed under Apache-2.0

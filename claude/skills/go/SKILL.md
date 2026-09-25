@@ -84,7 +84,7 @@ references load at their steps.
   review, and writing the harness are **silent**: the UI already shows the activity, so narrating it
   is pure leak. If what you are about to emit is none of (a)/(b)/(c), the correct output is **nothing**.
   **Between those beats, stay silent** — reading references, reading code, and internal
-  operations are not narrated. **No transition lines** ("now I'll…", "먼저 …", "let me read…", "Now the …" announcing each write) — at
+  operations are not narrated. **No transition lines** ("now I'll...", "먼저 ...", "let me read...", "Now the ..." announcing each write) — at
   those plumbing moments your voice slips into the instructions' language (English) or internal tokens;
   emit *nothing* there, don't translate it. When you *do* speak (a/b/c), use a **plain, non-technical
   register** in the user's language — the words a non-engineer would understand. This is your default
@@ -271,8 +271,8 @@ when a lightweight fix would take seconds.
    - **Delta** (marker present): update only the changed-scope `docs/` (read all current docs first;
      escalate an in-scope conflict; new module → new AGENTS.md + navigation-tree update).
    See `harness-lifecycle.md` for the marker rule and the clobber safety guard.
-   **Write every file silently** — do not announce each file or section as you go ("Now the docs…",
-   "이제 모듈 노트를…", "Now the module roadmap note in `X`"); the UI already shows each write. This
+   **Write every file silently** — do not announce each file or section as you go ("Now the docs...",
+   "이제 모듈 노트를...", "Now the module roadmap note in `X`"); the UI already shows each write. This
    multi-file writing sequence is the last place narration leaks — emit nothing between writes.
 
 10. **Final review** — one subagent checks the **full diff on the base** for spec conformance + code

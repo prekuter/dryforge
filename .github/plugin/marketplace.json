@@ -8,7 +8,7 @@
     {
       "name": "dryforge",
       "description": "Intent to implementation: ready, then go.",
-      "version": "1.3.5",
+      "version": "1.3.6",
       "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
       "source": "./agent-plugin",
       "homepage": "https://github.com/prekuter/dryforge",
