@@ -85,8 +85,9 @@ regen_barriers:
   `references/dependency-calc.md`): RISKY if the behavioral contract names an explicit edge case,
   invariant, state-coordination, or validation rule; NONE if the target is config / schema / docs /
   pure scaffold with no behavioral surface; otherwise MECHANICAL. This is a derivation heuristic
-  judged per task, not a fixed checklist. If a producer omits it, go falls back to the implementer
-  judging risk at build time — no break.
+  judged per task, not a fixed checklist. If a producer omits it, the task is unclassified: go leans
+  toward stronger verification, and the implementer still judges test ceremony at build time — no
+  break.
 - go derives waves by topological sort of `depends`, then dispatches in
   batches of **≤8 concurrent**.
 - `regen_barriers` = cross-cutting steps between waves (timing: after task X). The

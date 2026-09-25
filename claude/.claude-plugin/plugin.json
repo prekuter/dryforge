@@ -1,8 +1,10 @@
 {
   "name": "dryforge",
-  "description": "A bounded-autonomy plugin harness that turns approved intent into verified implementation.",
-  "version": "1.3.1",
-  "license": "AGPL-3.0-only",
-  "keywords": ["spec", "plan", "intent", "elicitation", "execution", "orchestration", "parallel", "subagent", "tdd", "code-review", "worktree"],
-  "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" }
+  "description": "A bounded-autonomy plugin harness for coding agents. Intent to implementation: ready, then go.",
+  "version": "1.3.5",
+  "license": "Apache-2.0",
+  "keywords": ["intent", "elicitation", "spec", "plan", "orchestration", "harness", "bounded-autonomy", "coding-agent"],
+  "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
+  "homepage": "https://github.com/prekuter/dryforge",
+  "repository": "https://github.com/prekuter/dryforge"
 }

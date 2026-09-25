@@ -1,10 +1,10 @@
 ---
 name: migration
 description: >
-  Convert an existing project into the dryforge documentation system: read the codebase,
-  elicit what code can't reveal, and generate a project harness (CLAUDE.md / AGENTS.md +
-  docs/ + per-module AGENTS.md). Use when the user invokes the `migration` skill on an
-  existing project. Requires git.
+  Bring an existing codebase into Dryforge, once. Reads the code, asks what code cannot show —
+  business rules, security policy, what is intentional — and writes the project docs at the entry
+  points agents already read. Use when the user invokes the `migration` skill on an existing
+  project. Requires git.
 disable-model-invocation: true
 ---
 
@@ -123,12 +123,13 @@ what to improve — then present the review to the user, explain it, and get app
 
 **Force-load `references/harness-format.md`** and generate the whole harness to its spec, in order:
 
-1. If a CLAUDE.md exists, back it up to `.dryforge/backup/`.
-2. Create `docs/` and every file in it (harness-format spec).
-3. Create CLAUDE.md / AGENTS.md (identical content).
-4. Create a module AGENTS.md per module identified in SCAN.
-5. Record the current state in `tracking/status.md` (done vs. remaining, against full scope).
-6. Create the `.dryforge/` directory if absent.
+1. Create the `.dryforge/` directory if absent.
+2. If a CLAUDE.md or AGENTS.md exists, back each one up to `.dryforge/backup/` (entry-point handling
+   in harness-format).
+3. Create `docs/` and every file in it (harness-format spec).
+4. Create CLAUDE.md / AGENTS.md (identical content).
+5. Create a module AGENTS.md per module identified in SCAN.
+6. Record the current state in `docs/tracking/status.md` (done vs. remaining, against full scope).
 
 Explore sources fully before writing; verify each file against the code both ways (omission /
 hallucination) as you go — this self-check is separate from Phase 4.

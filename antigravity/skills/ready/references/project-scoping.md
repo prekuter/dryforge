@@ -28,12 +28,12 @@ Flow: **tentative read → dialogue → update → final presentation → user c
 
 ## Project character controls depth — not a formal grade
 
-Let the project's character *itself* be the context that sets DESIGN's depth. Do **not** assign a
-formal tier (L/M/H, small/medium/large as a label). A grade becomes a **ceiling** — "it's a small
-project, so design shallow" — which violates floor-not-ceiling. State the character in prose ("a
-single-user local tool with no network surface and no multi-user state") and let that prose carry
-the depth, so domain depth, technical-design depth, and security depth come out proportional to what
-the project actually is.
+Let the project's character *itself* be the context that sets the foundation design's depth. Do
+**not** assign a formal tier (L/M/H, small/medium/large as a label). A grade becomes a **ceiling** —
+"it's a small project, so design shallow" — which violates floor-not-ceiling. State the character in
+prose ("a single-user local tool with no network surface and no multi-user state") and let that
+prose carry the depth, so domain depth, technical-design depth, and security depth come out
+proportional to what the project actually is.
 
 ## YAGNI gate
 

@@ -7,7 +7,7 @@
 #   platform/grok/     grok-only plugin.json + LICENSE
 #   platform/agent-plugin/  Agent Plugins 1.0 plugin.json + LICENSE
 #   platform/antigravity/   Antigravity plugin.json + rules + LICENSE
-#   README.md          repo-root README (+ README_KO.md) — GitHub landing only, NOT bundled into plugins
+#   README.md          repo-root README (+ README_ko.md) — GitHub landing only, NOT bundled into plugins
 #   claude/            generated Claude plugin   (committed; Claude installs this)
 #   codex/plugin/      generated Codex plugin    (committed; Codex installs this)
 #   grok/              generated Grok plugin     (committed; Grok installs this)
@@ -49,7 +49,7 @@ echo "✓ shared references byte-identical (3 pairs)"
 
 # ── guard ③: skills discovered dynamically from src ─────────────────────────
 SKILLS=""
-for d in "$SRC"/*/; do SKILLS="$SKILLS $(basename "$d")"; done
+for d in "$SRC"/*/; do [ -d "$d" ] && SKILLS="$SKILLS $(basename "$d")"; done
 [ -n "$SKILLS" ] || { echo "FAILED: src/skills is empty" >&2; exit 1; }
 
 # Per-skill allowed-tools for the Claude build. All three add Agent: ready dispatches the
@@ -75,7 +75,7 @@ done
 # guard ②: assert the injection actually landed (perl substitution can no-op silently)
 for s in $SKILLS; do
   f="$OUT/claude/skills/$s/SKILL.md"
-  if ! grep -q '^disable-model-invocation: true$' "$f" || ! grep -q '^allowed-tools: ' "$f"; then
+  if [ "$(grep -c '^disable-model-invocation: true$' "$f")" -ne 1 ] || [ "$(grep -c '^allowed-tools: ' "$f")" -ne 1 ]; then
     echo "FAILED: Claude frontmatter injection failed for skill: $s" >&2
     exit 1
   fi
@@ -147,8 +147,8 @@ find "$OUT/claude" "$OUT/codex" "$OUT/grok" "$OUT/agent-plugin" "$OUT/antigravit
   -name ".DS_Store" -delete 2>/dev/null || true
 
 # ── guard ④: version consistency ────────────────────────────────────────────
-# All 4 plugin.json carry the same non-empty version AND it matches the CHANGELOG
-# top entry. Catches manual-edit skew at build time instead of leaving it for a
+# All 8 plugin.json (4 platform inputs + 4 generated) carry the same non-empty
+# version AND it matches the CHANGELOG top entry. Catches manual-edit skew at build time instead of leaving it for a
 # human (or another agent) to spot. Release tags are validated separately so
 # the build remains independent of Git state.
 pj_ver() { perl -ne 'if(/"version"\s*:\s*"([^"]+)"/){print $1; last}' "$1"; }

@@ -1,9 +1,10 @@
 ---
 name: go
 description: >
-  Execute a refined 3-doc (handoff, spec, plan) produced by ready:
-  wave-based parallel implementation with right-sized verification (test-first where it fits),
-  spec-first review, and integration gates. Use when the user invokes the `go` skill after `ready` wrote the 3-doc. Requires git.
+  Carry out the intent approved in `ready`, as meant, and prove it with checks that actually ran.
+  Comes back to you if the work would change what you approved, keeps the project docs in step,
+  and never merges on its own. Use when the user invokes the `go` skill after `ready`. Requires
+  git.
 ---
 
 # go
@@ -33,11 +34,10 @@ references load at their steps.
 - **escalate-don't-guess.** Architecture mismatch, suspected spec violation, ambiguous task,
   unresolvable conflict → stop and **ask the user**; never guess. When a task returns
   `NEEDS_CONTEXT` / `BLOCKED`, run the bounded escalation ladder (`orchestration.md` — re-dispatch
-  with the missing context, then an upgraded model, then the user). Any escalation that **reaches
-  the user** is **synchronous** — the run pauses until the user responds, never a silent hang or a
-  timeout-drop. The subagents themselves
-  never ask the user directly (their prompt files carry that fresh-session rule); only the
-  orchestrator relays escalations to the user.
+  with the missing context, then a stronger model where the platform allows it, then the user). Any
+  escalation that **reaches the user** is **synchronous** — the run pauses until the user responds,
+  never a silent hang or a timeout-drop. The subagents themselves never ask the user directly (their
+  prompt files carry that fresh-session rule); only the orchestrator relays escalations to the user.
 - **Protect main; evidence over self-report.** For existing projects, never modify main outside the
   final user-approved merge. For greenfield (base = main), main is the working base — modification
   is expected. Gates pass on captured command exit codes, not on an agent's "looks fine."
@@ -265,7 +265,7 @@ when a lightweight fix would take seconds.
      **first-cycle invariant** (`ready` always writes it); if a first-cycle handoff has **no
      Foundation section**, do **not** guess one from spec + code — **stop and ask the user to
      regenerate the 3-doc via `ready`** (`harness-lifecycle.md`, fail-fast precondition). Back up +
-     critically rework any existing CLAUDE.md with user approval.
+     critically rework any existing CLAUDE.md / AGENTS.md with user approval.
    - **Delta** (marker present): update only the changed-scope `docs/` (read all current docs first;
      escalate an in-scope conflict; new module → new AGENTS.md + navigation-tree update).
    See `harness-lifecycle.md` for the marker rule and the clobber safety guard.
@@ -284,7 +284,7 @@ when a lightweight fix would take seconds.
     it in `docs/tracking/findings.md` and defer (scope-limited delta).
 
 12. **User gate.** Present for approval. **First cycle:** present the code result **and** the harness
-    as a reconciliation against the decisions the user took part in — *"the [X] we agreed in DESIGN is
+    as a reconciliation against the decisions the user took part in — *"the [X] we agreed is
     recorded in the harness as [this]"* — **not** a raw document dump. **Later cycle:** include a
     harness-change summary in the result report.
 

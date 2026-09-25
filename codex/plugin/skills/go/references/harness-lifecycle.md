@@ -23,10 +23,11 @@ This is the whole detection rule — simple on purpose. Consequences:
   the failed run are unapproved, so overwriting them is correct. The 3-doc stays active (not yet
   archived), so the retry has its sources.
 - **Safety guard against clobbering.** If first-cycle is detected (no marker) **but** a harness
-  structure already exists on disk (a `CLAUDE.md` with dryforge structure + a populated `docs/`) —
-  e.g. a fresh clone where the committed harness is present but the local marker isn't — do **not**
-  blindly overwrite it. Stop and ask the user whether to treat it as an existing harness (delta) or
-  regenerate. (escalate-don't-guess; never destroy a harness you didn't just generate.)
+  structure already exists on disk (an entry file (CLAUDE.md or AGENTS.md) with the harness
+  navigation structure + a populated `docs/`) — e.g. a fresh clone where the committed harness is
+  present but the local marker isn't — do **not** blindly overwrite it. Stop and ask the user
+  whether to treat it as an existing harness (delta) or regenerate. (escalate-don't-guess; never
+  destroy a harness you didn't just generate.)
 
 ## 3-doc re-read (mandatory, both modes)
 
@@ -46,15 +47,15 @@ intent) → code (implementation fact). The Foundation's richness sets the harne
   `ready`** (escalate-don't-guess). This is a one-line precondition check, not a fallback mode.
 
 Generate to `harness-format.md`:
-1. If a CLAUDE.md exists, back it up to `.dryforge/backup/`, review it critically, propose the
-   disposition to the user, and rewrite only approved content.
+1. If a CLAUDE.md or AGENTS.md exists, back each one up to `.dryforge/backup/`, review it
+   critically, propose the disposition to the user, and rewrite only approved content.
 2. The whole `docs/` structure (all files).
 3. CLAUDE.md / AGENTS.md (identical content).
 4. A module AGENTS.md per implemented module.
 
 Map the Foundation to files per `foundation-format.md` (domain → business-rules; technical →
-architecture + security + standards + operations; identity → the CLAUDE.md overview; future scope →
-status.md's "remaining"). Future-scope content with no code yet is correct, not a hallucination.
+architecture + security + standards + operations; identity → the entry-point overview; future scope
+→ status.md's "remaining"). Future-scope content with no code yet is correct, not a hallucination.
 
 ## Delta — update only the changed scope
 

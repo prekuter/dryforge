@@ -1,7 +1,7 @@
 {
   "name": "dryforge",
   "interface": {
-    "displayName": "dryforge"
+    "displayName": "Dryforge"
   },
   "plugins": [
     {

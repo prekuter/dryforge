@@ -15,8 +15,8 @@ silently — a conflict is escalated to the user (see "Conflict" below).
 project* that is worth keeping — a trap, a non-obvious mechanism, a decision and its reason, a run
 procedure — goes into the harness (engineering-notes / operations / decisions / the matching doc),
 **never into the agent's own host memory or any external / per-agent memory store**. Host memory is
-private to one agent on one platform and invisible to the next agent and to the other platform's
-entry point; project knowledge parked there is lost to everyone else and to the next cycle. The
+private to one agent on one platform and invisible to the next agent and to other agents' entry
+points; project knowledge parked there is lost to everyone else and to the next cycle. The
 harness is portable, shared, and committed with the project — it is the one place durable project
 knowledge belongs.
 
@@ -36,7 +36,7 @@ category that *does* apply is a hollow shell — a defect.
 ```
 project-root/
 ├── CLAUDE.md                     ← Claude Code entry point
-├── AGENTS.md                     ← Codex entry point (identical content to CLAUDE.md)
+├── AGENTS.md                     ← agent entry point (identical content to CLAUDE.md)
 ├── docs/
 │   ├── architecture.md           ← system composition
 │   ├── business-rules.md         ← domain logic
@@ -141,11 +141,12 @@ Must contain:
   the user immediately; everything else → record in `docs/tracking/findings.md`. Not generic
   boilerplate.
 
-Handling an existing CLAUDE.md: (1) back it up to `.dryforge/backup/`; (2) review the old content
-**critically** — do not transcribe it. Decide which dryforge document each piece belongs in, drop
-what the new `docs/` already covers, and improve/re-state what is worth keeping; (3) present the
-review to the user (what went where, what was dropped and why) and get approval; (4) rewrite into
-the dryforge structure (approved content only).
+Handling an existing entry file (CLAUDE.md / AGENTS.md): (1) back up each one that exists to
+`.dryforge/backup/`; (2) review the old content **critically** — do not transcribe it. Decide which
+dryforge document each piece belongs in, drop what the new `docs/` already covers, and
+improve/re-state what is worth keeping; (3) present the review to the user (what went where, what
+was dropped and why) and get approval; (4) rewrite into the dryforge structure (approved content
+only).
 
 ## docs/ file specs
 
@@ -323,7 +324,7 @@ One per meaningful unit (module, service, package, app, …).
   cohesive functional units. Forms differ per stack, so don't hardcode; minimum heuristic: a unit
   that *has an independent entry point/interface, or is an independent build/test unit, or has an
   explicit boundary (directory + manifest)*. One or more → a module candidate. **Exclude** generated
-  code, vendored external copies (vendor, node_modules, …), and example/test-only directories.
+  code, vendored or installed dependency directories, and example/test-only directories.
 - **Quality floor**: scope states "Y is not this module's scope," not only "this module does X";
   invariants are verifiable statements; boundaries are concrete — not "doesn't touch other modules"
   but an explicit list of which modules/areas are off-limits.
@@ -362,7 +363,7 @@ self-resolve; the user always decides.
 - Generate the whole `docs/` structure (all files).
 - Generate CLAUDE.md / AGENTS.md.
 - Generate module AGENTS.md (per identified module).
-- If a CLAUDE.md exists, back it up and rewrite (see entry-point handling).
+- If a CLAUDE.md or AGENTS.md exists, back it up and rewrite (see entry-point handling).
 
 ### Delta update (`go`, second cycle onward)
 - **Read the current `docs/` first and treat it as the existing project constraint** — no separate
@@ -402,12 +403,12 @@ as adding new content.
   lacks (omission), and what the doc has but the code lacks (hallucination — except content that
   derives from future scope, which is correct, see harness-review.md).
 - **A discovered contradiction is not propagated.** When sources conflict — an existing doc vs the
-  code, two existing docs, or a claim you can't confirm (e.g. a README "requires Go 1.22+" while
-  `go.mod` pins `1.26.3`) — do not copy both sides into the harness. Reconcile from the authoritative
-  source (code / manifest / config is ground truth for *what currently is*; for *what should be*, the
-  user decides) and write the single reconciled fact. If it can't be resolved from a source, record it
-  in `findings.md` (with the conflict and why) or escalate — never leave two statements that can't
-  both be true.
+  code, two existing docs, or a claim you can't confirm (e.g. a README claiming one minimum runtime
+  version while the manifest pins another) — do not copy both sides into the harness. Reconcile from
+  the authoritative source (code / manifest / config is ground truth for *what currently is*; for
+  *what should be*, the user decides) and write the single reconciled fact. If it can't be resolved
+  from a source, record it in `findings.md` (with the conflict and why) or escalate — never leave
+  two statements that can't both be true.
 - **Filling files is not the goal.** The goal is the next agent working this project without going
   off the rails. A sentence that doesn't serve that goal is not written, however accurate.
 

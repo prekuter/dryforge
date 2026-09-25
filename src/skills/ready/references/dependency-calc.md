@@ -1,6 +1,6 @@
 # dependency-calc.md — the Execution Graph
 
-The **last** step of authoring: after spec, plan, and handoff are final, compute the
+The **last** step of PLAN: after the spec is frozen and the plan prose is written, compute the
 machine-readable scheduling skeleton. The schema is in `output-format.md`; this file is *how*
 to fill it. Compute it once here — go follows it and never re-judges dependencies.
 
@@ -47,10 +47,11 @@ constraints.
 
 ## Task risk tier (optional)
 
-Per task, optionally classify the behavioral risk so the implementer can size its **per-task test
-ceremony**. The field shape is `risk: RISKY | MECHANICAL | NONE`. It is **optional**:
-omit it and the implementer judges risk at build time (no break). When present it
-is visible in the 3-doc the user reviews before go runs.
+Per task, optionally classify the behavioral risk. It sizes the implementer's **per-task test
+ceremony** and, for a single-task wave, go's execution mode; it does not set review topology. The
+field shape is `risk: RISKY | MECHANICAL | NONE`. It is **optional**. If omitted, the task is
+unclassified: go leans toward stronger verification, and the implementer still judges test ceremony
+at build time (no break). When present it is visible in the 3-doc the user reviews before go runs.
 
 Derivation heuristic (a **floor, not a checklist** — judged per task):
 
@@ -69,7 +70,7 @@ A step that must run **between** waves because one task changes an input others 
 from: schema → client/type generation, contract → codegen, message-catalog rebuilds, etc.
 Encode `{ after: [ids], run: "<command>" }`. **The command is discovered while reading the
 project** — never hardcode a stack's regen command. Note for the executor: if the regen *output* is
-consumed by a later task, it must be **committed** to the feature branch (and not gitignored), or it
+consumed by a later task, it must be **committed** to the base (and not gitignored), or it
 won't reach the fresh worktree of a downstream wave — same propagation rule as the deferred-wiring
 commit.
 

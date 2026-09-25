@@ -1,32 +1,29 @@
 {
   "name": "dryforge",
-  "version": "1.3.1",
-  "description": "A bounded-autonomy plugin harness that turns approved intent into verified implementation.",
+  "version": "1.3.5",
+  "description": "A bounded-autonomy plugin harness for coding agents. Intent to implementation: ready, then go.",
   "author": {
     "name": "prekuter",
     "email": "prekuter@dryforge.dev"
   },
   "homepage": "https://github.com/prekuter/dryforge",
   "repository": "https://github.com/prekuter/dryforge",
-  "license": "AGPL-3.0-only",
+  "license": "Apache-2.0",
   "keywords": [
-    "spec",
-    "plan",
     "intent",
     "elicitation",
-    "execution",
+    "spec",
+    "plan",
     "orchestration",
-    "parallel",
-    "subagent",
-    "tdd",
-    "code-review",
-    "worktree"
+    "harness",
+    "bounded-autonomy",
+    "coding-agent"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "dryforge",
-    "shortDescription": "Intent-to-implementation: Ready, then Go.",
-    "longDescription": "A bounded-autonomy plugin harness that turns approved intent into verified implementation.",
+    "displayName": "Dryforge",
+    "shortDescription": "Intent to implementation: ready, then go.",
+    "longDescription": "A bounded-autonomy plugin harness for coding agents. Intent to implementation: ready, then go.",
     "developerName": "prekuter",
     "category": "Productivity",
     "capabilities": [
@@ -34,8 +31,8 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use dryforge ready to turn this goal, doc, or notes into a 3-doc.",
-      "Use dryforge go to execute the 3-doc."
+      "Use Dryforge ready to turn this goal, doc, or notes into an intent to approve.",
+      "Use Dryforge go to carry out the approved intent."
     ],
     "brandColor": "#2563EB"
   }

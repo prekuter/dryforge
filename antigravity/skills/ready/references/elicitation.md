@@ -134,11 +134,11 @@ So the surface is enumerated *exhaustively* (completeness) while questions stay 
 only `assumed` slots become questions. **An `assumed` slot may not survive into the spec** — that is
 the exit bar, now *observable* (below) rather than a feeling.
 
-The two detectors in `gap-analysis.md` (completeness-sweep, cardinality-coupling) are concrete
-slot-finders that populate the lenses; the risk-proportional lenses in `intent-review.md` press the
-high-stakes slots harder. The accounting is **ephemeral working memory** — it drives the exit scan and
-feeds the independent backstop, then evaporates; it is **never** written into the spec as provenance
-tags (`output-format.md`).
+The three probes in `gap-analysis.md` (domain-silence, completeness-sweep, cardinality-coupling) are
+concrete slot-finders that populate the lenses; the risk-proportional lenses in `intent-review.md`
+press the high-stakes slots harder. The accounting is **ephemeral working memory** — it drives the
+exit scan and feeds the independent backstop, then evaporates; it is **never** written into the spec
+as provenance tags (`output-format.md`).
 
 ## Ask well — so the user can actually answer
 

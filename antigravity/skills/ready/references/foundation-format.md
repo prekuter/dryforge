@@ -12,11 +12,12 @@ an invariant (see "First-cycle precondition" below).
 
 ## Purpose
 
-The first cycle's CALIBRATE/DESIGN produces project-wide foundation knowledge that does *not* belong in
-spec.md. spec.md carries only **this task's** execution contract; the **project-wide** foundation —
-the full domain model, architecture decisions, security model, conventions, future scope — goes in
-the handoff's Project Foundation. This split keeps `go` from over-implementing (it executes the
-task's spec, not the whole project) while giving it project context to implement *within*.
+The first cycle's CALIBRATE and the first-cycle foundation design in ELICIT produce project-wide
+foundation knowledge that does *not* belong in spec.md. spec.md carries only **this task's**
+execution contract; the **project-wide** foundation — the full domain model, architecture decisions,
+security model, conventions, future scope — goes in the handoff's Project Foundation. This split
+keeps `go` from over-implementing (it executes the task's spec, not the whole project) while giving
+it project context to implement *within*.
 
 ## Structure — four fixed sections
 
@@ -53,7 +54,7 @@ Foundation is a **conditional expansion inside the handoff's "supplement" role**
   makes `go` design the spec's "auth implementation" with role support in mind.)
 - **At harness creation.** Each Foundation area maps to `docs/` files per `go`'s `harness-format.md`:
   domain model → business-rules.md; technical decisions → architecture.md + security.md +
-  standards.md + operations.md; identity → the CLAUDE.md overview; future scope → status.md's
+  standards.md + operations.md; identity → the entry-point overview; future scope → status.md's
   "remaining."
 
 ## Lifetime

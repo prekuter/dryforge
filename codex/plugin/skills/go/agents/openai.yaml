@@ -1,7 +1,7 @@
 interface:
-  display_name: "dryforge go"
-  short_description: "Execute a dryforge 3-doc."
-  default_prompt: "Use dryforge go to execute the 3-doc in .dryforge/."
+  display_name: "Dryforge go"
+  short_description: "Carry out the approved intent and verify it."
+  default_prompt: "Use Dryforge go to carry out the approved intent."
 
 policy:
   allow_implicit_invocation: false
