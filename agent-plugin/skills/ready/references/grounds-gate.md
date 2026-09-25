@@ -31,10 +31,10 @@ the detectors raise are false positives) while keeping the grounded structural/c
 The drop default exists to suppress **noise** — not to let the agent route a load-bearing question it
 doesn't want to ask around ELICIT's exit bar (`elicitation.md` — "no guess survives"). That exit only governs
 candidates that *became questions*; a candidate killed here never reaches it. So a lazy agent could
-under-argue ground ② ("a framework default probably covers this") to drop a load-bearing dimension
+under-argue ground 2 ("a framework default probably covers this") to drop a load-bearing dimension
 before the bar ever sees it. **Close that route:** when the dropped candidate is on a **load-bearing
 dimension the decision-surface accounting raised** (`elicitation.md`), the drop is **not silent** — it must be **recorded in the
-spec as that dimension's `N/A — covered by [the ground-② argument]`** (e.g. "Concurrency: N/A — the
+spec as that dimension's `N/A — covered by [the ground-2 argument]`** (e.g. "Concurrency: N/A — the
 framework's transaction default serializes these writes"). This converts a silent suppression into an
 **auditable, falsifiable claim** the independent 3-doc-gate can check against the code. Dropping noise
 stays silent; dropping a load-bearing dimension leaves evidence.

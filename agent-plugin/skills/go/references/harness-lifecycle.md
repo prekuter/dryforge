@@ -80,7 +80,7 @@ elsewhere — updating stale content matters as much as adding new content.
 
 After the user approves (final user gate), **move** the active 3-doc into `.dryforge/NNN/`: copy
 `.dryforge/{handoff,spec,plan}.md` into the new `.dryforge/NNN/` (sequential number: highest existing
-+ 1, e.g. `001`, `002`, …) **and then delete them from the `.dryforge/` root.** Archiving is a *move,
++ 1, e.g. `001`, `002`, ...) **and then delete them from the `.dryforge/` root.** Archiving is a *move,
 not a copy* — after it, the root holds **no active 3-doc** (only `NNN/` archives, `status.json`,
 `backup/`). This matters: if the root copies are left, the next cycle's producer finds a stale
 previous-cycle 3-doc at the root and has to disambiguate + overwrite it; moving leaves a clean root so

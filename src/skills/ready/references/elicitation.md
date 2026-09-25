@@ -31,7 +31,7 @@ elicit; it never lowers the *floor* of "no guess survives on a load-bearing deci
 You reach understanding by one of two methods, chosen per decision by **who holds the knowledge.**
 Both converge on the same thing — the user's intent.
 
-| The decision is… | knowledge sits with | method | how |
+| The decision is... | knowledge sits with | method | how |
 |---|---|---|---|
 | **domain / behavior** | the **user** | **EXTRACT** | draw it out ("when X, what should happen?"). The user knows; you must not invent. Mine to the end. |
 | **technical** | the **agent** | **PRESENT** | translate the user's generality, *grounded in the domain you've extracted*, into concrete options + trade-offs, recommendation first; the user chooses. |

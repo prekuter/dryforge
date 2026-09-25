@@ -44,7 +44,7 @@ regen_barriers:
   direct the final review to focus on that task.
 - **`regen_barriers[]`** — `{ after: [ids], run: "<cmd>" }`: a cross-cutting step that must run
   **between** waves once `after` is satisfied (schema→client/type generation, contract→codegen,
-  catalog rebuilds, …). The command is project-specific (discovered by the producer); go runs it
+  catalog rebuilds, ...). The command is project-specific (discovered by the producer); go runs it
   as given, it does not invent one.
 
 ## What is NOT in the graph (do not look for it here)

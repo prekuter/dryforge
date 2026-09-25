@@ -41,7 +41,7 @@ The calibration read caps the scale of all downstream design. A personal tool th
 enterprise architecture gets caught here. The gate is **not** a unilateral cut: if, while deepening an
 axis, you sense a design is heavier than the project's character warrants, surface it with your
 reasoning
-("this is more infrastructure than a single-user tool needs because …") and let the user decide —
+("this is more infrastructure than a single-user tool needs because ...") and let the user decide —
 proceed if they need it, scale down if they agree it's overkill. Never silently shrink scope, and
 never silently inflate it.
 
