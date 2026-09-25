@@ -53,8 +53,8 @@ long as each exit code is captured separately. The completion gate remains the f
   the conditional mid-run spec-review still fires for any task meeting its narrow bar — **RISKY +
   downstream dependents + deviation-cascade risk** — even when implemented inline. Collapse saves
   dispatch / worktree / merge / per-wave-gate overhead, **not** that targeted guard. (RISKY alone
-  never triggers a spec-review — it only sizes test ceremony — so "more RISKY" ≠ "more spec-reviews",
-  and collapse stays cheap.)
+  never triggers a spec-review — it sizes test ceremony and single-task execution mode, not review
+  topology — so "more RISKY" ≠ "more spec-reviews", and collapse stays cheap.)
 - **No-file-diff tasks stay off the worktree path.** A task whose declared work targets are
   **state / external only** — its result lives *outside* the tree (a DB migration run, an external
   config applied, a remote registration), so it produces **no file diff** — is handled on the
@@ -189,10 +189,10 @@ the orchestrator knows its own state):
 | `BLOCKED` | cannot proceed (conflict, ambiguity) | analyze; walk the bounded escalation ladder (below), then **escalate to the user** |
 
 **Bounded escalation ladder** (for `BLOCKED` / `NEEDS_CONTEXT`): **attempt 1** — re-dispatch with
-more context (the missing slice, the resolved ambiguity); **attempt 2** — re-dispatch with an
-upgraded model; if it is **still BLOCKED**, **escalate to the user** with full context: what was
-tried, what each attempt produced, and why it failed. The budget is bounded — do not loop
-re-dispatching past the ladder.
+more context (the missing slice, the resolved ambiguity); **attempt 2** — re-dispatch with a
+stronger model where the platform allows it; if it is **still BLOCKED**, **escalate to the user**
+with full context: what was tried, what each attempt produced, and why it failed. The budget is
+bounded — do not loop re-dispatching past the ladder.
 
 ## Context budget
 
@@ -255,7 +255,7 @@ re-dispatching past the ladder.
    decision, not silence. **Record the base tip SHA after the gate passes** (e.g. `GATE_SHA=$(git rev-parse HEAD)`) — the
    completion gate compares against it to avoid redundant re-runs (see SKILL.md, Completion gate). **Run verify commands in parallel** when they are independent — capture each exit code separately
    so failure attribution is clear. Wall time = max(commands), not sum. Pattern: issue all verify
-   commands in a single Bash call, backgrounding each and collecting its exit code individually
+   commands in a single shell call, backgrounding each and collecting its exit code individually
    (e.g. `cmd1 & p1=$!; cmd2 & p2=$!; wait $p1; e1=$?; wait $p2; e2=$?`), then report per-command
    pass/fail.
 6. **Clean up or recycle** task worktrees — if a later parallel wave exists, **recycle** pooled
@@ -300,7 +300,7 @@ non-behavioral changes only — substantive findings still go to an independent 
 
 | Failure | Response |
 |---|---|
-| `BLOCKED` / `NEEDS_CONTEXT` | walk the bounded ladder: attempt 1 more context → attempt 2 upgraded model → escalate |
+| `BLOCKED` / `NEEDS_CONTEXT` | walk the bounded ladder: attempt 1 more context → attempt 2 stronger model where the platform allows it → escalate |
 | max retries exceeded | **escalate to the user + preserve the worktree for manual recovery** (do not discard) |
 | mid-run spec-review fail | re-dispatch with the specific fix |
 | final review fail | fix-dispatch the blocking findings, re-run final review |

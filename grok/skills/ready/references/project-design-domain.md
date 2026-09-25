@@ -1,4 +1,4 @@
-# project-design-domain.md — first-cycle DESIGN (domain model)
+# project-design-domain.md — first-cycle foundation design (domain model)
 
 Extract the project's **domain model** from the user. This is the **extraction** mode (knowledge
 lives with the user; you must draw it out — never invent it), and the thickest first-cycle

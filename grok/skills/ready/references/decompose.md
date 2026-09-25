@@ -6,7 +6,7 @@ judge.** "What is correct?" (conflict) and "is it enough?" (gap) are deferred: c
 ELICIT as questions, gaps are uncomputable until ELICIT establishes the depth floor (first cycle: the foundation design's character→depth; delta: the harness).
 
 **Do not refine the input in place.** The moment you polish the INPUT as a draft, it hardens into
-ground truth — that is authority creep, the exact failure the unified `ready` removes. The INPUT is
+ground truth — that is authority creep, the exact failure `ready` exists to prevent. The INPUT is
 **ore to mine, not a draft to polish**. So this stage's output is *signal* (the raw classified
 material), and the spec is written fresh from the *validated intent* ELICIT produces (`elicitation.md`),
 not from the INPUT itself.

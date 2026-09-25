@@ -122,9 +122,11 @@ regen_barriers: []
 (Four graph tasks → two waves: `{T1, T2}` then `{T3, T4}`. The wiring step is **not** here — it is
 the orchestrator's per-wave deferred-writer, run after the wave's tasks merge, as noted above.)
 
-(The `risk:` atoms above are **optional** — `RISKY | MECHANICAL | NONE`. They only size the
-implementer's per-task test ceremony; omitting one just lets the implementer judge risk at build
-time. Here T1/T2 carry named invariants/edge rules, so they read RISKY; T3/T4 are left unmarked.)
+(The `risk:` atoms above are **optional** — `RISKY | MECHANICAL | NONE`. They size the implementer's
+per-task test ceremony and, for a single-task wave, go's execution mode. Omitting one leaves the
+task unclassified: go leans toward stronger verification, and the implementer still judges test
+ceremony at build time. Here T1/T2 carry named invariants/edge rules, so they read RISKY; T3/T4 are
+left unmarked.)
 
 (No `regen_barriers` here — nothing regenerates from another task's output. If, say, T1 changed a
 schema that a client/types step regenerates from, you'd add

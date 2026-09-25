@@ -1,6 +1,6 @@
 # reviewer-prompt.md — final review (spec + code + harness)
 
-After all waves merge, the integration gate passes, and the **harness has been created/updated**
+After all waves merge, the completion gate passes, and the **harness has been created/updated**
 (`harness-lifecycle.md`), one reviewer subagent checks the **full diff on the base** (from initial
 state to current) **plus the harness**. This is the single review pass — spec conformance, code
 quality, and (when the harness was created/updated this cycle) harness content and format.
@@ -15,7 +15,7 @@ edge-case rules, API surface? Every spec requirement should be traceable to code
 missing behavior, violated invariants, edge cases the spec specifies that the code doesn't handle.
 
 **Lens 2: code quality.** Cross-task consistency, seam leaks where tasks meet, duplication, naming
-and pattern divergence across independently-written code. The integration gate already proved the
+and pattern divergence across independently-written code. The completion gate already proved the
 combined state builds and runs — your scope is what mechanical gates cannot see.
 
 **Lenses 3–4: harness** (all four dimensions of `harness-review.md`, not only content/format) —

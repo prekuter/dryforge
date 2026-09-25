@@ -1,10 +1,9 @@
 ---
 name: ready
 description: >
-  From any input — a natural-language goal, existing docs (spec / plan / brain-dump), notes, or a
-  mix — interactively elicit and validate intent and produce an execution-ready 3-doc (handoff, spec,
-  plan) for go, replacing third-party brainstorming + planning in one skill. Input format is open;
-  the input is material, not ground truth. Use when the user invokes the `ready` skill. Requires git.
+  Understand what you mean before anything is built. Takes anything — a one-line idea, notes, a
+  spec, or a mix — reads the project first, asks only what is yours to decide, and writes your
+  intent down for you to approve. Use when the user invokes the `ready` skill. Requires git.
 disable-model-invocation: true
 allowed-tools: Read, Edit, Write, Bash, Grep, Glob, Agent, AskUserQuestion
 ---
@@ -57,7 +56,7 @@ where the input came from. The 3-doc contract is in `references/output-format.md
   contracts, build/verify commands, registration points) at runtime.
 - **Subagents only at the two independent checks.** Every stage that *builds* intent — ORIENT,
   DECOMPOSE, ELICIT, SPEC+REVIEW, PLAN, HANDOFF — runs **inline in the main session** (intent grounding
-  must see *raw* context, not a summary — the same reason migration is inline-only). The **only**
+  must see *raw* context, not a summary — the same reason migration generates inline). The **only**
   subagent dispatches are the two *independent checks* — independent because they did **not author**
   the intent (not because they are blind): **intent-completeness** (reads the dialogue to hunt the
   producer's own un-grounded guesses before SPEC → loops to the user) and the **3-doc-gate** (sees only
@@ -164,9 +163,10 @@ questions are ELICIT's. Everything ORIENT produces is *context*, not a conclusio
    conflict here (DECOMPOSE catches it, ELICIT asks it). Absent → **first cycle**: no harness; ELICIT
    will force-load the foundation refs.
    - **Safety guard (no marker but a harness on disk).** If `status.json` is absent but a dryforge
-     harness already exists on disk (dryforge-structured `CLAUDE.md` / `AGENTS.md` + populated
-     `docs/`), do **not** assume greenfield — **stop and ask** whether to treat it as existing context
-     (delta) or regenerate (first cycle). Don't guess (same as go's clobber guard).
+     harness already exists on disk (an entry file (`CLAUDE.md` or `AGENTS.md`) with the harness
+     navigation structure + a populated `docs/`), do **not** assume greenfield — **stop and ask**
+     whether to treat it as existing context (delta) or regenerate (first cycle). Don't guess (same
+     as go's clobber guard).
 4. **Ground the code (inline, optional).** If code exists, read the *cheapest map first* — repo
    instructions, file list, manifests, verify scripts, the directories the input points at. **Stop
    broad reading the moment the completion bar is met** (inline ≠ "read everything" — suppress

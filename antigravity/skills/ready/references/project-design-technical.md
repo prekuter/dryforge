@@ -1,4 +1,4 @@
-# project-design-technical.md — first-cycle DESIGN (technical decisions)
+# project-design-technical.md — first-cycle foundation design (technical decisions)
 
 Establish the project's **technical decisions** with the user. This is the **present** mode (knowledge
 lives with *you*; the user speaks in generalities — translate them into concrete options +

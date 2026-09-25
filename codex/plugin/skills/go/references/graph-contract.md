@@ -30,12 +30,13 @@ regen_barriers:
   (sequential) wave** it picks the **execution mode** — `MECHANICAL` / `NONE` → the orchestrator
   implements directly on the base; `RISKY` → dispatch a subagent in a worktree (independent
   verification, A=A avoidance, base protected by the merge-gate). Risk sizes test ceremony and
-  single-task execution mode; **review topology is governed by `orchestration.md`'s review policy** (a
-  `RISKY` task *with downstream dependents + cascade risk* may add a mid-run spec-review — risk alone
-  does not). Multi-task waves always dispatch regardless of risk. **Omitted `risk` = the producer did
-  not judge → treat as *unclassified*, not `MECHANICAL`:** go judges at read time and biases toward
-  dispatch / stronger verification if any behavioral surface appears (degrade-don't-corrupt); the
-  implementer still judges test ceremony at build time — no break.
+  single-task execution mode; **review topology is governed by `orchestration.md`'s review policy**
+  (a `RISKY` task *with downstream dependents + cascade risk* may add a mid-run spec-review — risk
+  alone does not). Multi-task waves default to parallel dispatch regardless of risk; collapse and
+  no-file-diff routing follow `orchestration.md`. **Omitted `risk` = the producer did not judge →
+  treat as *unclassified*, not `MECHANICAL`:** go judges at read time and biases toward dispatch /
+  stronger verification if any behavioral surface appears (degrade-don't-corrupt); the implementer
+  still judges test ceremony at build time — no break.
 - **Runtime risk upgrade.** If the producer marked a task `MECHANICAL` / `NONE` but go finds it is
   actually `RISKY` while implementing (an unexpectedly complex state change, an external-system
   integration), the orchestrator strengthens independent verification. It does **not** switch an

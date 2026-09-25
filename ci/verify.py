@@ -286,23 +286,44 @@ def validate_antigravity_package(root: Path) -> None:
     print(f"OK Antigravity package ({len(generated_names)} skills + invocation rule)")
 
 
-def git_diff(root: Path) -> str:
+def git_status(root: Path) -> str:
     top = Path(run(["git", "rev-parse", "--show-toplevel"], root, capture=True)).resolve()
     relative = root.resolve().relative_to(top)
     pathspec = "." if relative == Path(".") else relative.as_posix()
-    return run(["git", "diff", "--", pathspec], top, capture=True)
+    return run(["git", "status", "--porcelain", "--untracked-files=all", "--", pathspec], top, capture=True)
 
 
 def validate_reproducible_build(root: Path) -> None:
-    before = git_diff(root)
+    before = git_status(root)
     if before:
-        raise VerificationError("verification requires a clean tracked tree")
+        raise VerificationError(f"verification requires a clean tree:\n{before}")
     run(["bash", "-n", "build/build.sh"], root)
     run(["bash", "build/build.sh"], root)
-    after = git_diff(root)
+    after = git_status(root)
     if after:
-        raise VerificationError(f"generated outputs are stale:\n{after}")
+        raise VerificationError(f"generated outputs are stale or uncommitted:\n{after}")
     print("OK reproducible build")
+
+
+def validate_codex_invocation(root: Path) -> None:
+    skills = sorted(path.name for path in (root / "src/skills").iterdir() if path.is_dir())
+    pattern = re.compile(r"^policy:\n  allow_implicit_invocation: false$", re.MULTILINE)
+    for name in skills:
+        overlay = root / "codex/plugin/skills" / name / "agents/openai.yaml"
+        if not overlay.is_file() or not pattern.search(overlay.read_text(encoding="utf-8")):
+            raise VerificationError(f"Codex implicit invocation is not disabled for skill: {name}")
+    print(f"OK Codex manual-only invocation ({len(skills)} skills)")
+
+
+def validate_licenses(root: Path) -> None:
+    canonical = (root / "LICENSE").read_bytes()
+    if b"Apache License" not in canonical or b"Version 2.0, January 2004" not in canonical:
+        raise VerificationError("LICENSE is not the Apache License 2.0 text")
+    copies = sorted(path for path in root.rglob("LICENSE") if ".git" not in path.parts)
+    for path in copies:
+        if path.read_bytes() != canonical:
+            raise VerificationError(f"LICENSE differs from the root LICENSE: {path.relative_to(root)}")
+    print(f"OK license copies ({len(copies)})")
 
 
 def verify(root: Path, tag: str | None = None) -> None:
@@ -316,8 +337,11 @@ def verify(root: Path, tag: str | None = None) -> None:
         "platform/agent-plugin/plugin.json",
         "platform/antigravity/plugin.json",
         "platform/antigravity/rules/invocation.md",
+        ".claude-plugin/marketplace.json",
+        ".agents/plugins/marketplace.json",
         ".grok-plugin/marketplace.json",
         ".github/plugin/marketplace.json",
+        "LICENSE",
     ]
     missing = [item for item in required if not (root / item).exists()]
     if missing:
@@ -328,6 +352,8 @@ def verify(root: Path, tag: str | None = None) -> None:
     validate_agent_plugin(root)
     validate_grok_package(root)
     validate_antigravity_package(root)
+    validate_codex_invocation(root)
+    validate_licenses(root)
     validate_reproducible_build(root)
 
 

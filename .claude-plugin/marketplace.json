@@ -1,11 +1,11 @@
 {
   "name": "dryforge",
-  "description": "Official marketplace for dryforge.",
+  "description": "Official marketplace for Dryforge.",
   "owner": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
   "plugins": [
     {
       "name": "dryforge",
-      "description": "Intent-to-implementation: Ready, then Go.",
+      "description": "Intent to implementation: ready, then go.",
       "author": { "name": "prekuter", "email": "prekuter@dryforge.dev" },
       "source": "./claude",
       "homepage": "https://github.com/prekuter/dryforge"

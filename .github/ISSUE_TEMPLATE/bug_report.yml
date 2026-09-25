@@ -1,0 +1,28 @@
+name: Bug report
+description: Something went wrong while using Dryforge.
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: conversation
+    attributes:
+      label: Conversation
+      description: Optional. For a faster fix and a closer look, paste the conversation where it happened, with anything private masked.
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: e.g. Claude Code 2.1.0
+  - type: input
+    id: dryforge-version
+    attributes:
+      label: Dryforge version
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      placeholder: e.g. /ready
