@@ -7,7 +7,7 @@
 #   platform/grok/     grok-only plugin.json + LICENSE
 #   platform/agent-plugin/  Agent Plugins 1.0 plugin.json + LICENSE
 #   platform/antigravity/   Antigravity plugin.json + rules + LICENSE
-#   README.md          repo-root README (+ README_ko.md) — GitHub landing only, NOT bundled into plugins
+#   README.md          repo-root README (+ README_{ko,zh,ja}.md) — GitHub landing only, NOT bundled into plugins
 #   claude/            generated Claude plugin   (committed; Claude installs this)
 #   codex/plugin/      generated Codex plugin    (committed; Codex installs this)
 #   grok/              generated Grok plugin     (committed; Grok installs this)

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.7 (2026-09-27)
+
+- Added Chinese and Japanese READMEs
+
 ## v1.3.6 (2026-09-26)
 
 - Replaced typographic ellipses and circled numerals in skill text with plain ASCII so plugin security scanners no longer misread them; no change to skill behavior

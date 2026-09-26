@@ -6,7 +6,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/readme/hero-light.svg">
-  <img alt="Dryforge — Your agent works like a senior developer. A bounded-autonomy plugin harness for coding agents. Intent to implementation: ready, then go." src="assets/readme/hero-light.svg" width="100%">
+  <img alt="Dryforge: Intent to implementation: ready, then go." src="assets/readme/hero-light.svg" width="100%">
 </picture>
 </p>
 
@@ -30,7 +30,9 @@
   <a href="#install-and-update">Install</a> ·
   <a href="#getting-started">Getting started</a> ·
   <a href="https://dryforge.dev">Website</a> ·
-  <a href="./README_ko.md">한국어</a>
+  <a href="./README_ko.md">한국어</a> ·
+  <a href="./README_zh.md">中文</a> ·
+  <a href="./README_ja.md">日本語</a>
 </p>
 
 </div>
@@ -163,9 +165,11 @@ agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
 
 # Everyone has been using agents wrong.
 
-Coding agents already know how to work. What they don't have is your intent.
+Agents already know how to work. What they don't have is your intent.
 
-The industry filled that gap with process. Workflows, methodologies, rules, swarms of agents — all fixed before anyone asks what you are building. The method comes first, and your intent is cut to fit it. Your intent should decide the method. Instead, the method decides your intent:
+The industry filled that gap with process. Workflows, methodologies, rules, swarms of agents — all fixed before anyone asks what you are building. The method comes first, and your intent is cut to fit it.
+
+**Your intent should decide the method. Instead, the method decides your intent.**
 
 > *"We write tests first. Now — what are you building?"*
 
@@ -230,7 +234,7 @@ This is where Dryforge begins, and where it breaks from everything else.
 
 It reads what you bring as material, not orders. A detailed document is not assumed right because it is detailed, and a rough one is no excuse to guess. Nothing you said is quietly rewritten into something you didn't mean.
 
-Most tools then ask the way a form does — a fixed list, one field at a time, in the order the procedure needs — or they don't ask at all, and guess. Dryforge asks the way a senior engineer does, after reading everything first.
+Most tools then ask the way a form does — a fixed list, one field at a time, in the order the procedure needs — or they don't ask at all, and guess. Dryforge reads everything first, then asks only what takes judgment.
 
 The more it understands what you are trying to do, the less it needs to ask. Whatever you have already made clear — in your words, your material, or your code — it settles on its own, and does not ask again.
 
@@ -260,7 +264,7 @@ What was decided, and why, stays in your project. Each turn of the loop starts f
 
 It is kept as plain documents in your repository, not inside a tool. Switch agents, and your project comes with you.
 
-It attaches to the agent you already use and is not tuned to any model. One skill source runs on Claude Code, Codex, Grok Build, GitHub Copilot CLI, and Antigravity CLI; adding an agent took packaging alone.
+It attaches to the agent you already use and is not tuned to any model. One skill source runs on every supported agent; adding an agent takes packaging alone.
 
 <a id="getting-started"></a>
 
@@ -318,8 +322,7 @@ It writes your project's documentation and leaves the commit to you. If you alre
 
 ```text
 your-project/
-├── CLAUDE.md                 # read first by Claude Code
-├── AGENTS.md                 # read first by Codex and other agents
+├── AGENTS.md / CLAUDE.md     # read first by every agent
 ├── docs/
 │   ├── architecture.md       # how the system fits together
 │   ├── business-rules.md     # how the product must behave
@@ -334,7 +337,7 @@ your-project/
 
 Each turn of the loop leaves your project's intent written down — the decisions, the reasons, the rules the code can't show. Only what matters stays. Each run keeps what it touches in step with the code, so it sharpens instead of piling up. The next `ready` starts from it.
 
-It is plain Markdown, written in the language you work in, at the entry points coding agents already read. The documents describe your project, not Dryforge. Any agent, in any session, works from them — with or without Dryforge. Remove the plugin and they stay.
+It is plain Markdown, written in the language you work in, at the entry points agents already read. The documents describe your project, not Dryforge. Any agent, in any session, works from them — with or without Dryforge. Remove the plugin and they stay.
 
 Dryforge runs only when you call it. What it leaves behind keeps working.
 
