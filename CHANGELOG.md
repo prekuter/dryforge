@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3.8 (2026-10-17)
+
+- Updated the Codex package to the current plugin format; older Codex versions keep working
+- Added the community Discord
+
 ## v1.3.7 (2026-09-27)
 
 - Added Chinese and Japanese READMEs

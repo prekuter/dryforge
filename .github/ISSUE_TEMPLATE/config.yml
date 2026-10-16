@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Discord
+    url: https://discord.gg/bU7yjyH3wY
+    about: Chat with the community, ask questions, and share what you built.
   - name: Questions
     url: https://github.com/prekuter/dryforge/discussions
     about: Ask and discuss in Discussions.

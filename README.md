@@ -11,14 +11,17 @@
 </p>
 
 <p>
-<a href="https://github.com/prekuter/dryforge/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/prekuter/dryforge/actions/workflows/ci.yml/badge.svg"></a>
-&nbsp;&nbsp;
-<a href="https://github.com/prekuter/dryforge/releases"><img alt="Release" src="https://img.shields.io/github/v/release/prekuter/dryforge?style=flat-square&label=release"></a>
-&nbsp;&nbsp;
-<a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prekuter/dryforge?style=flat-square"></a>
-&nbsp;&nbsp;
-<a href="https://github.com/prekuter/dryforge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/prekuter/dryforge?style=flat-square&logo=github&label=stars"></a>
-&nbsp;&nbsp;
+  <a href="https://discord.gg/bU7yjyH3wY"><img alt="Join the Dryforge Discord" src="https://img.shields.io/badge/Discord-Join%20the%20community-5865F2?style=for-the-badge&logo=discord&logoColor=white&labelColor=454FBF"></a>
+  <a href="https://github.com/prekuter/dryforge/stargazers"><img alt="Star on GitHub" src="https://img.shields.io/github/stars/prekuter/dryforge?style=for-the-badge&logo=github&label=Star&labelColor=3f3f46&color=18181b"></a>
+</p>
+
+<p>
+  <a href="https://github.com/prekuter/dryforge/releases"><img alt="Release" src="https://img.shields.io/github/v/release/prekuter/dryforge?style=flat-square&label=release&color=3f3f46"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prekuter/dryforge?style=flat-square&color=3f3f46"></a>
+  <a href="https://github.com/prekuter/dryforge/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/prekuter/dryforge/ci.yml?style=flat-square&label=CI"></a>
+</p>
+
+<p>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/supported-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/readme/supported-light.svg">
@@ -30,6 +33,7 @@
   <a href="#install-and-update">Install</a> ·
   <a href="#getting-started">Getting started</a> ·
   <a href="https://dryforge.dev">Website</a> ·
+  <a href="https://discord.gg/bU7yjyH3wY"><b>Discord</b></a> ·
   <a href="./README_ko.md">한국어</a> ·
   <a href="./README_zh.md">中文</a> ·
   <a href="./README_ja.md">日本語</a>
@@ -160,6 +164,9 @@ agy plugin install https://github.com/prekuter/dryforge/tree/main/antigravity
 
 
 </details>
+
+> [!TIP]
+> Stuck on install, or want to share what you built? Ask in [Discord](https://discord.gg/bU7yjyH3wY).
 
 <a id="the-problem"></a>
 
@@ -348,6 +355,12 @@ The working record of each task stays under `.dryforge/`, local to your machine.
 > [!IMPORTANT]
 > Git is required. Before `go` runs, the working tree must be clean — no uncommitted or untracked files outside `.dryforge/` — and if your main branch tracks a remote, it must have no unpushed commits.
 
+<a id="community"></a>
+
+# Community
+
+Join us on [Discord](https://discord.gg/bU7yjyH3wY) for questions, feedback, and to share what you built with Dryforge. Report bugs and propose changes in [GitHub Issues](https://github.com/prekuter/dryforge/issues).
+
 # License
 
 [Apache License 2.0](LICENSE) (`Apache-2.0`).
@@ -358,6 +371,6 @@ The working record of each task stays under `.dryforge/`, local to your machine.
 
 <img src="https://dryforge.dev/logo-mark.svg" width="40" height="40" alt="Dryforge">
 
-<sub><a href="#top">back to top</a> · <a href="https://dryforge.dev">dryforge.dev</a> · © 2026 prekuter · Apache-2.0</sub>
+<sub><a href="#top">back to top</a> · <a href="https://dryforge.dev">dryforge.dev</a> · <a href="https://discord.gg/bU7yjyH3wY">Discord</a> · © 2026 prekuter · Apache-2.0</sub>
 
 </div>

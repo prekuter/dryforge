@@ -3,7 +3,8 @@
 #
 #   src/skills/        canonical, platform-neutral skills (single source of truth)
 #   platform/claude/   claude-only frontmatter values + plugin.json + LICENSE
-#   platform/codex/    codex-only openai.yaml + plugin.json + LICENSE
+#   platform/codex/    codex-only openai.yaml + plugin.portable.json (Agent Plugins 1.0 root manifest)
+#                      + plugin.json (.codex-plugin compatibility overlay) + LICENSE
 #   platform/grok/     grok-only plugin.json + LICENSE
 #   platform/agent-plugin/  Agent Plugins 1.0 plugin.json + LICENSE
 #   platform/antigravity/   Antigravity plugin.json + rules + LICENSE
@@ -21,7 +22,7 @@
 #   ② frontmatter injection post-verified (a silent perl no-op must not ship)
 #   ③ skill list discovered dynamically from src/skills/*/ (a 4th skill without
 #     its claude_tools mapping or codex openai.yaml overlay fails the build)
-#   ④ all plugin.json versions non-empty + identical + match CHANGELOG top
+#   ④ all plugin manifest versions non-empty + identical + match CHANGELOG top
 
 set -euo pipefail
 
@@ -93,6 +94,9 @@ for s in $SKILLS; do
   [ -f "$OUT/codex/plugin/skills/$s/agents/openai.yaml" ] \
     || { echo "FAILED: missing Codex openai.yaml overlay for skill: $s" >&2; exit 1; }
 done
+# Root plugin.json is the portable Agent Plugins 1.0 manifest that current Codex reads first;
+# .codex-plugin/plugin.json stays as the compatibility overlay for older Codex clients.
+cp "$PLAT/codex/plugin.portable.json" "$OUT/codex/plugin/plugin.json"
 cp "$PLAT/codex/plugin.json" "$OUT/codex/plugin/.codex-plugin/plugin.json"
 cp "$PLAT/codex/LICENSE" "$OUT/codex/plugin/"
 
@@ -147,15 +151,16 @@ find "$OUT/claude" "$OUT/codex" "$OUT/grok" "$OUT/agent-plugin" "$OUT/antigravit
   -name ".DS_Store" -delete 2>/dev/null || true
 
 # ── guard ④: version consistency ────────────────────────────────────────────
-# All 8 plugin.json (4 platform inputs + 4 generated) carry the same non-empty
+# All 10 plugin manifests (5 platform inputs + 5 generated) carry the same non-empty
 # version AND it matches the CHANGELOG top entry. Catches manual-edit skew at build time instead of leaving it for a
 # human (or another agent) to spot. Release tags are validated separately so
 # the build remains independent of Git state.
 pj_ver() { perl -ne 'if(/"version"\s*:\s*"([^"]+)"/){print $1; last}' "$1"; }
 VERS=""
-for pj in "$PLAT/claude/plugin.json" "$PLAT/codex/plugin.json" \
+for pj in "$PLAT/claude/plugin.json" "$PLAT/codex/plugin.json" "$PLAT/codex/plugin.portable.json" \
           "$PLAT/grok/plugin.json" "$PLAT/agent-plugin/plugin.json" \
           "$OUT/claude/.claude-plugin/plugin.json" "$OUT/codex/plugin/.codex-plugin/plugin.json" \
+          "$OUT/codex/plugin/plugin.json" \
           "$OUT/grok/plugin.json" "$OUT/agent-plugin/plugin.json"; do
   v="$(pj_ver "$pj")"
   [ -n "$v" ] || { echo "FAILED: empty version: $pj" >&2; exit 1; }
@@ -172,7 +177,7 @@ if [ "$UNIQ" != "$CL_VER" ]; then
   echo "✗ plugin.json=v$UNIQ but CHANGELOG top=v$CL_VER" >&2
   exit 1
 fi
-echo "✓ version OK: v$UNIQ (8 manifests + CHANGELOG)"
+echo "✓ version OK: v$UNIQ (10 manifests + CHANGELOG)"
 
 # Publish only after every generated package and guard has succeeded. Existing outputs are
 # retained inside BUILD_TMP until the full swap completes, so a failed move can be rolled back.

@@ -17,10 +17,12 @@ ANTIGRAVITY_FIELDS = {"$schema", "name", "description"}
 VERSIONED_MANIFESTS = (
     Path("platform/claude/plugin.json"),
     Path("platform/codex/plugin.json"),
+    Path("platform/codex/plugin.portable.json"),
     Path("platform/grok/plugin.json"),
     Path("platform/agent-plugin/plugin.json"),
     Path("claude/.claude-plugin/plugin.json"),
     Path("codex/plugin/.codex-plugin/plugin.json"),
+    Path("codex/plugin/plugin.json"),
     Path("grok/plugin.json"),
     Path("agent-plugin/plugin.json"),
 )
@@ -36,6 +38,35 @@ AGENT_PLUGIN_FIELDS = {
     "keywords",
     "extensions",
 }
+AGENT_PLUGIN_STRING_FIELDS = ("version", "description", "homepage", "repository", "license")
+AGENT_PLUGIN_AUTHOR_FIELDS = {"name", "email", "url"}
+# Identity a portable root manifest and its Codex compatibility overlay must share.
+CODEX_IDENTITY_FIELDS = ("name", "version", "description", "author", "homepage", "repository", "license", "keywords")
+CODEX_OVERLAY_FIELDS = {
+    *CODEX_IDENTITY_FIELDS,
+    "skills",
+    "hooks",
+    "mcpServers",
+    "apps",
+    "interface",
+    "onboardingSkill",
+}
+CODEX_EXTENSION_FIELDS = {"apps", "hooks", "onboardingSkill", "interface"}
+CODEX_INTERFACE_STRING_FIELDS = {
+    "displayName",
+    "shortDescription",
+    "longDescription",
+    "developerName",
+    "category",
+    "websiteURL",
+    "privacyPolicyURL",
+    "termsOfServiceURL",
+    "brandColor",
+    "composerIcon",
+    "logo",
+}
+CODEX_INTERFACE_LIST_FIELDS = {"capabilities", "defaultPrompt", "screenshots"}
+CODEX_INTERFACE_REQUIRED = ("displayName", "shortDescription", "longDescription", "developerName", "category")
 SKILL_FIELDS = {
     "name",
     "description",
@@ -179,19 +210,60 @@ def frontmatter(path: Path) -> dict[str, str]:
     return values
 
 
+def is_string_list(value: object) -> bool:
+    return isinstance(value, list) and all(isinstance(item, str) for item in value)
+
+
+def validate_agent_plugin_manifest(manifest: dict, label: str) -> None:
+    """Check a manifest against the Agent Plugins 1.0 plugin.json schema."""
+    unknown = set(manifest) - AGENT_PLUGIN_FIELDS
+    if unknown:
+        raise VerificationError(f"unknown {label} manifest fields: {', '.join(sorted(unknown))}")
+    if manifest.get("$schema") != AGENT_PLUGIN_SCHEMA:
+        raise VerificationError(f"{label} schema is missing or unsupported")
+    name = manifest.get("name")
+    if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?", name):
+        raise VerificationError(f"invalid {label} name")
+    if "--" in name or ".." in name or len(name) > 64:
+        raise VerificationError(f"invalid {label} name")
+    for field in AGENT_PLUGIN_STRING_FIELDS:
+        if field in manifest and not isinstance(manifest[field], str):
+            raise VerificationError(f"{label} {field} must be a string")
+    author = manifest.get("author")
+    if author is not None:
+        if not isinstance(author, dict) or set(author) - AGENT_PLUGIN_AUTHOR_FIELDS:
+            raise VerificationError(f"{label} author must be an object with name, email, url")
+        if not all(isinstance(value, str) for value in author.values()):
+            raise VerificationError(f"{label} author fields must be strings")
+    if "keywords" in manifest and not is_string_list(manifest["keywords"]):
+        raise VerificationError(f"{label} keywords must be a list of strings")
+    extensions = manifest.get("extensions")
+    if extensions is not None:
+        if not isinstance(extensions, dict) or not all(isinstance(value, dict) for value in extensions.values()):
+            raise VerificationError(f"{label} extensions must map namespaces to objects")
+
+
+def validate_codex_interface(interface: object, label: str) -> None:
+    if not isinstance(interface, dict):
+        raise VerificationError(f"{label} interface must be an object")
+    unknown = set(interface) - CODEX_INTERFACE_STRING_FIELDS - CODEX_INTERFACE_LIST_FIELDS
+    if unknown:
+        raise VerificationError(f"unknown {label} interface fields: {', '.join(sorted(unknown))}")
+    for field in CODEX_INTERFACE_REQUIRED:
+        value = interface.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise VerificationError(f"{label} interface {field} is missing")
+    for field, value in interface.items():
+        if field in CODEX_INTERFACE_STRING_FIELDS and not isinstance(value, str):
+            raise VerificationError(f"{label} interface {field} must be a string")
+        if field in CODEX_INTERFACE_LIST_FIELDS and not is_string_list(value):
+            raise VerificationError(f"{label} interface {field} must be a list of strings")
+
+
 def validate_agent_plugin(root: Path) -> None:
     package = root / "agent-plugin"
     manifest = load_json(package / "plugin.json")
-    unknown = set(manifest) - AGENT_PLUGIN_FIELDS
-    if unknown:
-        raise VerificationError(f"unknown Agent Plugin manifest fields: {', '.join(sorted(unknown))}")
-    if manifest.get("$schema") != AGENT_PLUGIN_SCHEMA:
-        raise VerificationError("Agent Plugin schema is missing or unsupported")
-    name = manifest.get("name")
-    if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?", name):
-        raise VerificationError("invalid Agent Plugin name")
-    if "--" in name or ".." in name or len(name) > 64:
-        raise VerificationError("invalid Agent Plugin name")
+    validate_agent_plugin_manifest(manifest, "Agent Plugin")
     skills = package / "skills"
     if not skills.is_dir():
         raise VerificationError("Agent Plugin skills directory is missing")
@@ -217,6 +289,57 @@ def validate_agent_plugin(root: Path) -> None:
         if "allowed-tools" in values:
             raise VerificationError(f"platform-specific allowed-tools leaked into Agent Plugin: {skill.name}")
     print(f"OK Agent Plugins 1.0 package ({len(discovered)} skills)")
+
+
+def validate_codex_package(root: Path) -> None:
+    """Codex ships no plugin validator, so check the package against its published format here.
+
+    The root plugin.json is the portable Agent Plugins 1.0 manifest with Codex settings under
+    extensions["com.openai"]. Current Codex reads that inline object and ignores the overlay
+    entirely, while older clients read only .codex-plugin/plugin.json, so both must carry the same
+    identity and the same interface.
+    """
+    package = root / "codex/plugin"
+    portable = load_json(package / "plugin.json")
+    validate_agent_plugin_manifest(portable, "Codex root")
+    openai = portable.get("extensions", {}).get("com.openai")
+    if not isinstance(openai, dict):
+        raise VerificationError('Codex root manifest has no extensions["com.openai"] object')
+    unknown = set(openai) - CODEX_EXTENSION_FIELDS
+    if unknown:
+        raise VerificationError(f"unknown Codex extension fields: {', '.join(sorted(unknown))}")
+    validate_codex_interface(openai.get("interface"), "Codex root")
+
+    overlay_dir = package / ".codex-plugin"
+    extra = sorted(path.name for path in overlay_dir.iterdir() if path.name != "plugin.json")
+    if extra:
+        raise VerificationError(f"only plugin.json belongs in .codex-plugin: {', '.join(extra)}")
+    overlay = load_json(overlay_dir / "plugin.json")
+    unknown = set(overlay) - CODEX_OVERLAY_FIELDS
+    if unknown:
+        raise VerificationError(f"unknown Codex overlay fields: {', '.join(sorted(unknown))}")
+    if overlay.get("skills") != "./skills/":
+        raise VerificationError("Codex overlay must point skills at ./skills/")
+    validate_codex_interface(overlay.get("interface"), "Codex overlay")
+    for field in CODEX_IDENTITY_FIELDS:
+        if portable.get(field) != overlay.get(field):
+            raise VerificationError(f"Codex root manifest and overlay disagree on {field}")
+    for field in set(openai) | (set(overlay) & CODEX_EXTENSION_FIELDS):
+        if openai.get(field) != overlay.get(field):
+            raise VerificationError(f'Codex extensions["com.openai"].{field} differs from the overlay')
+
+    expected = sorted(path.name for path in (root / "src/skills").iterdir() if path.is_dir())
+    skills = package / "skills"
+    discovered = sorted(path.name for path in skills.iterdir() if path.is_dir()) if skills.is_dir() else []
+    if not expected or discovered != expected:
+        raise VerificationError(f"Codex skills {discovered} do not match src/skills {expected}")
+    for name in discovered:
+        values = frontmatter(skills / name / "SKILL.md")
+        if values.get("name") != name:
+            raise VerificationError(f"Codex skill name does not match directory: {name}")
+        if not values.get("description"):
+            raise VerificationError(f"Codex skill description is missing: {name}")
+    print(f"OK Codex package (portable manifest + overlay, {len(discovered)} skills)")
 
 
 def validate_grok_package(root: Path) -> None:
@@ -333,6 +456,7 @@ def verify(root: Path, tag: str | None = None) -> None:
         "src/skills",
         "platform/claude/plugin.json",
         "platform/codex/plugin.json",
+        "platform/codex/plugin.portable.json",
         "platform/grok/plugin.json",
         "platform/agent-plugin/plugin.json",
         "platform/antigravity/plugin.json",
@@ -350,6 +474,7 @@ def verify(root: Path, tag: str | None = None) -> None:
     validate_versions(root, tag)
     validate_marketplaces(root)
     validate_agent_plugin(root)
+    validate_codex_package(root)
     validate_grok_package(root)
     validate_antigravity_package(root)
     validate_codex_invocation(root)
