@@ -11,6 +11,16 @@
 </p>
 
 <p>
+<a href="https://dryforge.app">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/beta-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/readme/beta-light.svg">
+  <img alt="Dryforge app beta is open! Mac, free. Apply for the beta." src="assets/readme/beta-light.svg" width="100%">
+</picture>
+</a>
+</p>
+
+<p>
   <a href="https://discord.gg/bU7yjyH3wY"><img alt="Join the Dryforge Discord" src="https://img.shields.io/badge/Discord-Join%20the%20community-5865F2?style=for-the-badge&logo=discord&logoColor=white&labelColor=454FBF"></a>
   <a href="https://github.com/prekuter/dryforge/stargazers"><img alt="Star on GitHub" src="https://img.shields.io/github/stars/prekuter/dryforge?style=for-the-badge&logo=github&label=Star&labelColor=3f3f46&color=18181b"></a>
 </p>
@@ -32,7 +42,7 @@
 <p>
   <a href="#install-and-update">安装</a> ·
   <a href="#getting-started">开始使用</a> ·
-  <a href="https://dryforge.dev">网站</a> ·
+  <a href="https://dryforge.app">网站</a> ·
   <a href="https://discord.gg/bU7yjyH3wY"><b>Discord</b></a> ·
   <a href="./README.md">English</a> ·
   <a href="./README_ko.md">한국어</a> ·
@@ -369,8 +379,8 @@ Dryforge 只在你调用时运行，它留下的东西会一直起作用。
 
 <div align="center">
 
-<img src="https://dryforge.dev/logo-mark.svg" width="40" height="40" alt="Dryforge">
+<img src="https://dryforge.app/logo-mark.svg" width="40" height="40" alt="Dryforge">
 
-<sub><a href="#top">back to top</a> · <a href="https://dryforge.dev">dryforge.dev</a> · <a href="https://discord.gg/bU7yjyH3wY">Discord</a> · © 2026 prekuter · Apache-2.0</sub>
+<sub><a href="#top">back to top</a> · <a href="https://dryforge.app">dryforge.app</a> · <a href="https://discord.gg/bU7yjyH3wY">Discord</a> · © 2026 prekuter · Apache-2.0</sub>
 
 </div>
